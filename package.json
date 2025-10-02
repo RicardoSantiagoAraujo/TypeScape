@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "sass": "^1.90.0",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "build:packages": "npm install --prefix ./",
+    "build:ts": "tsc --project ./",
+    "build:scss": "sass --no-source-map --update .:.",
+    "build": "npm run build:packages && npm run build:ts && npm run build:scss"
+  },
+  "dependencies": {
+  }
+}
