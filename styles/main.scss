@@ -1,0 +1,82 @@
+
+  body
+  {
+    background-image : url("../assets/img/water.png");
+    background-size:100% 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  #grass
+  {
+    position: relative;
+    display:none;
+    width:700px;
+    height:700px;
+  }
+
+  #pikachu
+  {
+    position:relative;
+    top:0;
+    left:0;
+    display:inline-block;
+    transition: 0.2s;
+  }
+
+  #eclair{
+    position: absolute;
+    top:-150;
+    left:-60;
+    opacity: 0;
+    transition: 0.5s;
+    /* display: none; */
+  }
+
+  .eclairAnimation{
+    transform-origin: center;
+    animation: eclair 0.4s forwards;
+  }
+
+  .eclairAnimation2{
+    transform-origin: center;
+    animation: eclair 1s forwards;
+  }
+
+  @keyframes eclair{
+    0%{
+      transform: scale(1);
+    }
+    100%{
+      transform: scale(1.5)translate(-5%,-10%);
+    }
+  }
+
+  /* #pikachu img{
+    width: 100px;
+  } */
+
+  #effetEclairGrass{
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image : url("../assets/img/Grass.png");
+  }
+
+#effetEclairSea{
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image : url("../assets/img/water.png");
+  background-size:100% 100%;
+}
+
+  #eclairRandom, #eclairRandom2, #eclairRandom3, #eclairRandom4,#eclairRandom5, #eclairRandom6, #eclairRandom7, #eclairRandom8{
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+    display: block;
+    z-index: 100000;
+  }
