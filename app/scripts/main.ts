@@ -119,7 +119,7 @@ function applyEclairEffects() {
   effetsEclair.sea.style.filter =
     "brightness(2)contrast(110%)hue-rotate(-90deg)";
   imgPikachu.style.filter = "brightness(2)contrast(110%)";
-  effetsEclair.arena.style.transform = "scale(1.1)";
+  effetsEclair.arena.style.transform = "scale(1.03)";
 
   setTimeout(() => {
     // Reset effects after the animation ends
