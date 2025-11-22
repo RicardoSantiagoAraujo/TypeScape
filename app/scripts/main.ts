@@ -8,12 +8,12 @@ const imgPikachu = document.getElementById("imgPikachu") as HTMLImageElement;
 const inputName = document.getElementById("inputName") as HTMLInputElement;
 const btnStart = document.getElementById("btnStart") as HTMLButtonElement;
 const formStart = document.getElementById("formStart") as HTMLDivElement;
-const grass = document.getElementById("grass") as HTMLDivElement;
+const arena = document.getElementById("arena") as HTMLDivElement;
 const pikachu = document.getElementById("pikachu") as HTMLDivElement;
 const eclair = document.getElementById("eclair") as HTMLDivElement;
 
 const effetsEclair = {
-  grass: document.getElementById("effetEclairGrass") as HTMLDivElement,
+  arena: document.getElementById("effetEclairArena") as HTMLDivElement,
   sea: document.getElementById("effetEclairSea") as HTMLDivElement,
 };
 
@@ -37,11 +37,12 @@ function startGame(event: KeyboardEvent | MouseEvent) {
     event instanceof KeyboardEvent &&
     event.key !== "Enter" &&
     event.type !== "click"
-  )
+  ) {
     return;
+  }
 
   formStart.style.display = "none";
-  grass.style.display = "block";
+  arena.style.display = "block";
 }
 
 function movePikachu(event: KeyboardEvent) {
@@ -69,15 +70,17 @@ function movePikachu(event: KeyboardEvent) {
   imgPikachu.setAttribute("src", `assets/img/${pokemon}${direction}.png`);
 
   if (event.key === " ") {
-    triggerThunder();
+    triggerRandomThunderstorm();
   }
+
+  console.log("posY", posY);
+  console.log("posX", posX);
 }
 
-function triggerThunder() {
+function triggerRandomThunderstorm() {
   // Start eclair animations
   eclairRandoms.forEach((eclairElement) => {
     eclairElement.classList.add("eclairAnimation2");
-    eclairElement.style.opacity = "1";
     setRandomPosition(eclairElement);
   });
 
@@ -94,7 +97,6 @@ function triggerThunder() {
     audioElement.currentTime = 0;
     eclairRandoms.forEach((eclairElement) => {
       eclairElement.classList.remove("eclairAnimation2");
-      eclairElement.style.opacity = "0";
     });
   }, 2000);
 
@@ -110,23 +112,21 @@ function setRandomPosition(element: HTMLElement) {
 }
 
 function applyEclairEffects() {
-  eclair.style.opacity = "1";
   eclair.classList.add("eclairAnimation");
 
-  effetsEclair.grass.style.filter =
+  effetsEclair.arena.style.filter =
     "brightness(0.3)contrast(110%)hue-rotate(90deg)";
   effetsEclair.sea.style.filter =
     "brightness(2)contrast(110%)hue-rotate(-90deg)";
   imgPikachu.style.filter = "brightness(2)contrast(110%)";
-  effetsEclair.grass.style.transform = "scale(1.1)";
+  effetsEclair.arena.style.transform = "scale(1.1)";
 
   setTimeout(() => {
     // Reset effects after the animation ends
-    eclair.style.opacity = "0";
     eclair.classList.remove("eclairAnimation");
-    effetsEclair.grass.style.filter = "brightness(1)";
+    effetsEclair.arena.style.filter = "brightness(1)";
     effetsEclair.sea.style.filter = "brightness(1)";
-    effetsEclair.grass.style.transform = "scale(1)";
+    effetsEclair.arena.style.transform = "scale(1)";
     imgPikachu.style.filter = "brightness(1)";
   }, 500);
 }
