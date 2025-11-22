@@ -27,7 +27,6 @@ body {
 
 #pikachu {
   position: relative;
-  background-color: red;
   top: 0px;
   left: 0px;
   transition: 0.2s;
@@ -35,6 +34,18 @@ body {
   align-items: center;
   justify-content: center;
   width: fit-content;
+  z-index: 1;
+  &::before{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 10px;
+    background: radial-gradient(rgba(15, 21, 0, 0.356) 50%, transparent 90%);
+    bottom: 0px;
+    border-radius: 50%;
+    box-shadow: px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    z-index: -1;
+  }
 }
 
 #eclair {
