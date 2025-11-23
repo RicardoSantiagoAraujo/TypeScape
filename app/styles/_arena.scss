@@ -10,7 +10,25 @@
     background-image: url("../assets/img/Grass.png");
     border-radius: var.$arena-border-radius;
     box-shadow: 0px 3px 5px green, 0px 10px 30px white;
-    animation: arena_appear 1.5s forwards;
+    animation: arena_appear 1.5s forwards, waving_border 3s infinite linear alternate;
+
+}
+
+@keyframes waving_border {
+    0% {
+
+        box-shadow: 0px 3px 5px green, 10px 0px 30px white;
+    }
+
+    50% {
+
+         box-shadow: 0px 3px 5px green, 0px 5px 10px white;
+    }
+
+    100% {
+
+        box-shadow: 0px 3px 5px green, 0px 10px 30px white;
+    }
 }
 
 @keyframes arena_appear {
@@ -102,16 +120,20 @@
     background-image: url("../assets/img/Grass.png");
     border-radius: var.$arena-border-radius;
     transition: 0.2s ease-in-out;
-    animation: moving_grass 0.2s forwards infinite  linear alternate;
+    animation: moving_grass 0.2s forwards infinite linear alternate;
+
     @keyframes moving_grass {
         0% {
             background-position: 0 0;
         }
+
         100% {
             background-position: 1px 0px;
         }
 
-    };
+    }
+
+    ;
 }
 
 #effetEclairSea {
@@ -124,11 +146,13 @@
     background-image: url("../assets/img/water-grid.webp");
     background-size: 100px;
     background-repeat: repeat;
-    animation: moving_waves 5s forwards infinite  linear; // alternate
+    animation: moving_waves 5s forwards infinite linear; // alternate
+
     @keyframes moving_waves {
         0% {
             background-position: 0 0;
         }
+
         100% {
             background-position: 100px 100px;
         }
