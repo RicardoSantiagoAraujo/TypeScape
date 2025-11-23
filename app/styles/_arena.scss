@@ -102,6 +102,16 @@
     background-image: url("../assets/img/Grass.png");
     border-radius: var.$arena-border-radius;
     transition: 0.2s ease-in-out;
+    animation: moving_grass 0.2s forwards infinite  linear alternate;
+    @keyframes moving_grass {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 1px 0px;
+        }
+
+    };
 }
 
 #effetEclairSea {
