@@ -114,7 +114,16 @@
     background-image: url("../assets/img/water-grid.webp");
     background-size: 100px;
     background-repeat: repeat;
+    animation: moving_waves 5s forwards infinite  linear; // alternate
+    @keyframes moving_waves {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 100px 100px;
+        }
 
+    }
 }
 
 #eclairRandom1,
