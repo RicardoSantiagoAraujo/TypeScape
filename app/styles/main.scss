@@ -1,5 +1,6 @@
-$arena-size: 700px;
-$arena-border-radius: 30px;
+@use './variables' as var;
+@use './arena';
+@use './form';
 
 html {
   height: 100%;
@@ -11,113 +12,12 @@ html {
 body {
   height: 100%;
   width: 100%;
-  background-image: url("../assets/img/water.png");
-  background-size: 100% 100%;
+  padding: 0;
+  margin: 0;
+  background-image: url("../assets/img/water-grid.webp");
+  background-size: 60px;
+  background-repeat: repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#arena {
-  position: relative;
-  display: none;
-  width: $arena-size;
-  height: $arena-size;
-  border: 3px solid #0d631b34;
-  background-image: url("../assets/img/Grass.png");
-  border-radius: $arena-border-radius;
-}
-
-#pikachu {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  transition: 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  z-index: 1;
-  img{}
-  &::before{
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 10px;
-    background: radial-gradient(rgba(15, 21, 0, 0.356) 50%, transparent 90%);
-    bottom: 0px;
-    border-radius: 50%;
-    box-shadow: px 0px 15px 5px rgba(0, 0, 0, 0.2);
-    z-index: -1;
-  }
-}
-
-#eclair {
-  position: absolute;
-  opacity: 0;
-  top: -150px;
-  transition: 0.5s;
-  transform-origin: center;
-}
-
-.eclairAnimation {
-  transform-origin: center;
-  animation: eclair 0.4s forwards;
-}
-
-.eclairAnimation2 {
-  transform-origin: center;
-  animation: eclair 1s forwards;
-}
-
-@keyframes eclair {
-  0% {
-    transform: scale(1);
-  }
-
-  80% {
-    opacity: 1;
-    transform: scale(1.5)translate(-5%, -10%);
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-/* #pikachu img{
-    width: 100px;
-  } */
-
-#effetEclairArena {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("../assets/img/Grass.png");
-  border-radius: $arena-border-radius;
-  transition: 0.2s ease-in-out;
-}
-
-#effetEclairSea {
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("../assets/img/water.png");
-  background-size: 100% 100%;
-}
-
-#eclairRandom1,
-#eclairRandom2,
-#eclairRandom3,
-#eclairRandom4,
-#eclairRandom5,
-#eclairRandom6,
-#eclairRandom7,
-#eclairRandom8 {
-  opacity: 0;
-  transition: opacity 0.5s;
-  position: absolute;
-  display: block;
-  z-index: 100000;
 }
