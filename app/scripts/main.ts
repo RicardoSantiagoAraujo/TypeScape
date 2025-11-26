@@ -1,8 +1,9 @@
-const movementSpeed = 30;
-let posX = 0;
-let posY = 0;
-let direction = "Down";
-const pokemon = "pikachu";
+import { settings } from "./settings.js";
+const pokemon: string = settings.characterName;
+const movementSpeed: number = settings.MovementDistancePerClick;
+let posX: number = settings.startingPositionX;
+let posY: number = settings.startingPositionY;
+let direction: string;
 
 const imgPikachu = document.getElementById("imgPikachu") as HTMLImageElement;
 const inputName = document.getElementById("inputName") as HTMLInputElement;
@@ -61,8 +62,8 @@ function movePikachu(event: KeyboardEvent) {
   }
 
   // Prevent movement out of bounds
-  posX = Math.max(0, Math.min(660, posX));
-  posY = Math.max(0, Math.min(660, posY));
+  posX = Math.max(0, Math.min(settings.arenaWidth, posX));
+  posY = Math.max(0, Math.min(settings.arenaHeight, posY));
 
   pikachu.style.top = `${posY}px`;
   pikachu.style.left = `${posX}px`;
@@ -105,8 +106,8 @@ function triggerRandomThunderstorm() {
 }
 
 function setRandomPosition(element: HTMLElement) {
-  const randomX = Math.random() * 700 - 200;
-  const randomY = Math.random() * 700 - 200;
+  const randomX = Math.random() * settings.arenaWidth - 200;
+  const randomY = Math.random() * settings.arenaHeight - 200;
   element.style.top = `${randomX}px`;
   element.style.left = `${randomY}px`;
 }

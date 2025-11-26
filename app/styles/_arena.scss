@@ -4,8 +4,8 @@
 #arena {
     position: relative;
     display: none;
-    width: var.$arena-size;
-    height: var.$arena-size;
+    width: var.$arena-width;
+    height: var.$arena-height;
     border: 3px solid #0d631b34;
     background-image: url("../assets/img/Grass.png");
     border-radius: var.$arena-border-radius;
@@ -61,7 +61,11 @@
     width: fit-content;
     z-index: 1;
 
-    img {}
+    img {
+
+    height: var.$character-height;
+    width: var.$character-width;
+    }
 
     &::before {
         content: "";
