@@ -26,6 +26,9 @@ const eclairRandoms = Array.from(
 inputName.oninput = toggleStartButton;
 inputName.onkeydown = startGame;
 btnStart.onclick = startGame;
+if (settings.requireChacracterCreation === false) {
+  startGame(new MouseEvent("click"));
+}
 
 document.onkeydown = movePikachu;
 
@@ -62,8 +65,8 @@ function movePikachu(event: KeyboardEvent) {
   }
 
   // Prevent movement out of bounds
-  posX = Math.max(0, Math.min(settings.arenaWidth, posX));
-  posY = Math.max(0, Math.min(settings.arenaHeight, posY));
+  posX = Math.max(0, Math.min(settings.arenaWidth-settings.characterWidth, posX));
+  posY = Math.max(0, Math.min(settings.arenaHeight-settings.characterHeight, posY));
 
   pikachu.style.top = `${posY}px`;
   pikachu.style.left = `${posX}px`;
