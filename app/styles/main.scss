@@ -1,5 +1,6 @@
 @use './variables' as var;
 @use './arena';
+@use './character';
 @use './form';
 
 html {
@@ -20,4 +21,45 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+#instructions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+  h4 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #333;
+  }
+
+  table {
+    width: 200px;
+    text-align: left;
+
+    tr {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+
+      td.action {
+        font-weight: bold;
+        color: #000;
+      }
+
+      td.input {
+        font-style: italic;
+        color: #007BFF;
+      }
+    }
+  }
+
 }
