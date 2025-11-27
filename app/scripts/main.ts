@@ -27,7 +27,7 @@ settings.availableCharacters.forEach((charId) => {
     <input type="radio" name="option" value="Option 1" ${
       charId == settings.characterId ? "checked" : ""
     }>
-    <img src=${`assets/img/characters/${charId}/${charId}Down.png`} alt=${charId} width=${32} height=${32}/>
+    <img src=${`assets/img/characters/${charId}/${charId}Down.png`} alt=${charId} />
      `;
   if (charId == settings.characterId) {
   }
@@ -77,7 +77,7 @@ function startGame(event: KeyboardEvent | MouseEvent) {
   audioElement.play();
 }
 
-function moveCharacter(event: KeyboardEvent) { 
+function moveCharacter(event: KeyboardEvent) {
   if (gameState != "started") {
     // console.log("Game not yet started");
     return;

@@ -3,8 +3,8 @@ export var settings = {
   characterId: "pikachu",
   availableCharacters: ["pikachu", "farfetchd"],
   MovementDistancePerClick: 50,
-  arenaWidth: 530,
-  arenaHeight: 530,
+  arenaWidth: 550,
+  arenaHeight: 550,
   characterHeight: 50,
   characterWidth: 50,
   get startingPositionX() {
@@ -14,4 +14,5 @@ export var settings = {
     return (this.arenaHeight - this.characterHeight) / 2;
   },
   requireCharacterCreation: true,
+  actionCooldown: 3000
 };

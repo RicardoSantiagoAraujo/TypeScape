@@ -72,14 +72,40 @@
     gap: 10px;
 
     label {
+        $characterSelectorWidth: 33px;
+        $characterSelectorHeight: 33px;
+
         input[type="radio"] {
             display: none;
+
+
 
             &:checked+img {
                 background-color: rgba(0, 128, 0, 0.543);
                 border-radius: 10px;
                 border: 3px solid rgb(30, 255, 0);
             }
+        }
+
+        img {
+            width: $characterSelectorWidth;
+            height: $characterSelectorHeight;
+
+        }
+
+        animation: revealCharacters 0.3s;
+
+        @keyframes revealCharacters {
+            0% {
+                max-height: 0;
+                opacity: 0;
+            }
+
+            100% {
+                max-height: $characterSelectorHeight;
+                opacity: 1;
+            }
+
         }
     }
 

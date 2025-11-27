@@ -3,8 +3,12 @@ import {
   effetsEclair,
   eclairRandoms,
   imgCharacter,
+  actionCooldownTimer,
 } from "./elements.js";
 import { settings } from "./settings.js";
+
+var actionAvailable: boolean = true;
+var actionDuration: 5000;
 
 function triggerRandomThunderstorm() {
   eclairRandoms.forEach((eclairElement) => {
@@ -60,15 +64,49 @@ function applyEclairEffects() {
 }
 
 function onAction(event: KeyboardEvent) {
+  // console.log("action available: ", actionAvailable);
   // console.log("Trigger action keydown", event.key);
   if (event.key === " ") {
-    triggerRandomThunderstorm();
+    if (actionAvailable) {
+      triggerRandomThunderstorm();
+      restartCountdown();
+      setTimeout(() => {
+        eclairRandoms.forEach((eclair) => {
+          eclair.classList.remove("actionArenaEffect--active");
+        });
+      }, 500);
+      actionAvailable = false;
+      setTimeout(() => {
+        actionAvailable = true;
+      }, settings.actionCooldown);
+    }
   }
-  setTimeout(() => {
-    eclairRandoms.forEach((eclair) => {
-      eclair.classList.remove("actionArenaEffect--active");
-    });
-  }, 500);
 }
 
-document.addEventListener("keydown", onAction);
+document.addEventListener("keydown", (event) => {
+  onAction(event);
+});
+
+function timeFormat(time: number): string {
+  return String(Math.round((time / 1000) * 100) / 100) + "s";
+}
+
+function restartCountdown() {
+  var countdownTime = settings.actionCooldown;
+  actionCooldownTimer.classList.remove("ready");
+  actionCooldownTimer.innerHTML = timeFormat(countdownTime);
+  var stepSize = 100;
+  const interval = setInterval(function () {
+    countdownTime = countdownTime - stepSize; // Decrease the time by 1 second
+
+    // Display the remaining time
+    actionCooldownTimer.innerHTML = timeFormat(countdownTime);
+
+    // If the countdown reaches 0, stop the timer and display "EXPIRED"
+    if (countdownTime <= 0) {
+      clearInterval(interval);
+      actionCooldownTimer.innerHTML = "READY";
+      actionCooldownTimer.classList.add("ready");
+    }
+  }, stepSize); // Update the countdown every second
+}

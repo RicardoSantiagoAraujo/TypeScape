@@ -30,3 +30,7 @@ export const effetsEclair = {
 export const eclairRandoms = Array.from(
   document.querySelectorAll(`.eclairRandom`) as NodeListOf<HTMLElement>
 );
+
+export const actionCooldownTimer = document.querySelector(
+  "#actionCooldownTimer .timer"
+) as HTMLElement;
