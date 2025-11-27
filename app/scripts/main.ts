@@ -11,7 +11,7 @@ import {
   availableCharacters,
 } from "./elements.js";
 import "./action.js"; // Import actions to initialize them
-
+var gameState: "started" | "paused" = "paused";
 const characterName: string = settings.characterName;
 const movementSpeed: number = settings.MovementDistancePerClick;
 let posX: number = settings.startingPositionX;
@@ -73,10 +73,15 @@ function startGame(event: KeyboardEvent | MouseEvent) {
 
   formStart.style.display = "none";
   arena.style.display = "block";
+  gameState = "started";
   audioElement.play();
 }
 
-function moveCharacter(event: KeyboardEvent) {
+function moveCharacter(event: KeyboardEvent) { 
+  if (gameState != "started") {
+    // console.log("Game not yet started");
+    return;
+  }
   if (event.key === "ArrowDown" || event.key === "s") {
     posY += movementSpeed;
     direction = "Down";
@@ -90,7 +95,7 @@ function moveCharacter(event: KeyboardEvent) {
     posY -= movementSpeed;
     direction = "Up";
   } else {
-    return
+    return;
   }
 
   // Prevent movement out of bounds
