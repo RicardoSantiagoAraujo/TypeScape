@@ -1,6 +1,6 @@
 @use './variables' as var;
 
-#pikachu {
+#character {
     position: relative;
     top: 0px;
     left: 0px;
@@ -11,7 +11,6 @@
     width: fit-content;
     z-index: 1;
 
-    background-color: red;
     img {
 
         height: var.$character-height;
@@ -31,40 +30,86 @@
     }
 }
 
-#eclair {
+
+
+#actionArenaEffect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    .eclairRandom {
+        opacity: 0;
+        transition: opacity 0.5s;
+        position: absolute;
+        display: block;
+        z-index: 100000;
+        transform: translate(-50%, -50%);
+    }
+
+    .eclairRandom.actionArenaEffect--active {
+        transform-origin: center;
+        animation: actionArenaEffect 1s forwards;
+    }
+
+    @keyframes actionArenaEffect {
+        0% {
+            transform: scale(1)translate(-50%, -50%);
+        }
+
+        80% {
+            opacity: 1;
+            transform: scale(1.5)translate(-50%, -50%);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1)translate(-50%, -50%);
+        }
+    }
+
+}
+
+#actionCharacterEffect {
     position: absolute;
     opacity: 0;
-    top: -150px;
     transition: 0.5s;
     transform-origin: center;
-}
 
-.eclairAnimation {
-    transform-origin: center;
-    animation: eclair 0.4s forwards;
-}
-
-.eclairAnimation2 {
-    transform-origin: center;
-    animation: eclair 1s forwards;
-}
-
-@keyframes eclair {
-    0% {
-        transform: scale(1);
+    &.actionCharacterEffect--active {
+        transform-origin: center;
+        animation: actionCharacterEffect 1s forwards;
     }
 
-    80% {
-        opacity: 1;
-        transform: scale(1.5)translate(-5%, -10%);
+    @keyframes actionCharacterEffect {
+        0% {
+            transform: scale(0);
+        }
+
+        80% {
+            opacity: 1;
+            transform: scale(2.5);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
     }
 
-    100% {
-        opacity: 0;
-    }
+
 }
 
-/* #pikachu img{
+
+
+
+
+
+
+/* #character img{
     width: 100px;
   } */
 
@@ -73,7 +118,11 @@
     width: 100%;
     height: 100%;
     background-image: url("../assets/img/Grass.png");
+    background-size: 30% 30%;
+    background-repeat: repeat;
     border-radius: var.$arena-border-radius;
+    border: 3px solid #0d631b34;
+    box-shadow: 0px 3px 5px green, 0px 10px 30px white;
     transition: 0.2s ease-in-out;
     animation: moving_grass 0.2s forwards infinite linear alternate;
 
@@ -113,19 +162,4 @@
         }
 
     }
-}
-
-#eclairRandom1,
-#eclairRandom2,
-#eclairRandom3,
-#eclairRandom4,
-#eclairRandom5,
-#eclairRandom6,
-#eclairRandom7,
-#eclairRandom8 {
-    opacity: 0;
-    transition: opacity 0.5s;
-    position: absolute;
-    display: block;
-    z-index: 100000;
 }

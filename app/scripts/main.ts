@@ -1,36 +1,62 @@
 import { settings } from "./settings.js";
-const pokemon: string = settings.characterName;
+import {
+  character,
+  arena,
+  inputName,
+  btnStart,
+  btnMute,
+  audioElement,
+  formStart,
+  imgCharacter,
+  availableCharacters,
+} from "./elements.js";
+import "./action.js"; // Import actions to initialize them
+
+const characterName: string = settings.characterName;
 const movementSpeed: number = settings.MovementDistancePerClick;
 let posX: number = settings.startingPositionX;
 let posY: number = settings.startingPositionY;
 let direction: string;
 
-const imgPikachu = document.getElementById("imgPikachu") as HTMLImageElement;
-const inputName = document.getElementById("inputName") as HTMLInputElement;
-const btnStart = document.getElementById("btnStart") as HTMLButtonElement;
-const formStart = document.getElementById("formStart") as HTMLDivElement;
-const arena = document.getElementById("arena") as HTMLDivElement;
-const pikachu = document.getElementById("pikachu") as HTMLDivElement;
-const eclair = document.getElementById("eclair") as HTMLDivElement;
-
-const effetsEclair = {
-  arena: document.getElementById("effetEclairArena") as HTMLDivElement,
-  sea: document.getElementById("effetEclairSea") as HTMLDivElement,
-};
-
-const eclairRandoms = Array.from(
-  { length: 8 },
-  (_, i) => document.getElementById(`eclairRandom${i + 1}`) as HTMLDivElement
-);
+imgCharacter.src = `assets/img/characters/${settings.characterId}/${settings.characterId}Down.png`;
+character.style.top = `${posY}px`;
+character.style.left = `${posX}px`;
+settings.availableCharacters.forEach((charId) => {
+  const labelEl = document.createElement("label");
+  labelEl.innerHTML = `
+    <input type="radio" name="option" value="Option 1" ${
+      charId == settings.characterId ? "checked" : ""
+    }>
+    <img src=${`assets/img/characters/${charId}/${charId}Down.png`} alt=${charId} width=${32} height=${32}/>
+     `;
+  if (charId == settings.characterId) {
+  }
+  labelEl.onclick = () => {
+    settings.characterId = charId;
+    imgCharacter.src = `assets/img/characters/${settings.characterId}/${settings.characterId}Down.png`;
+  };
+  availableCharacters.appendChild(labelEl);
+});
 
 inputName.oninput = toggleStartButton;
 inputName.onkeydown = startGame;
 btnStart.onclick = startGame;
-if (settings.requireChacracterCreation === false) {
+if (settings.requireCharacterCreation === false) {
   startGame(new MouseEvent("click"));
 }
 
-document.onkeydown = movePikachu;
+// Mute / Unmute Theme Music
+btnMute.onclick = () => {
+  if (audioElement.paused) {
+    audioElement.play();
+    btnMute.value = "Mute Audio";
+  } else {
+    audioElement.pause();
+    btnMute.value = "Unmute Audio";
+  }
+};
+
+document.addEventListener("keydown", moveCharacter);
 
 function toggleStartButton() {
   btnStart.disabled = inputName.value === "";
@@ -47,9 +73,10 @@ function startGame(event: KeyboardEvent | MouseEvent) {
 
   formStart.style.display = "none";
   arena.style.display = "block";
+  audioElement.play();
 }
 
-function movePikachu(event: KeyboardEvent) {
+function moveCharacter(event: KeyboardEvent) {
   if (event.key === "ArrowDown" || event.key === "s") {
     posY += movementSpeed;
     direction = "Down";
@@ -62,75 +89,28 @@ function movePikachu(event: KeyboardEvent) {
   } else if (event.key === "ArrowUp" || event.key === "z") {
     posY -= movementSpeed;
     direction = "Up";
+  } else {
+    return
   }
 
   // Prevent movement out of bounds
-  posX = Math.max(0, Math.min(settings.arenaWidth-settings.characterWidth, posX));
-  posY = Math.max(0, Math.min(settings.arenaHeight-settings.characterHeight, posY));
+  posX = Math.max(
+    0,
+    Math.min(settings.arenaWidth - settings.characterWidth, posX)
+  );
+  posY = Math.max(
+    0,
+    Math.min(settings.arenaHeight - settings.characterHeight, posY)
+  );
 
-  pikachu.style.top = `${posY}px`;
-  pikachu.style.left = `${posX}px`;
+  character.style.top = `${posY}px`;
+  character.style.left = `${posX}px`;
 
-  imgPikachu.setAttribute("src", `assets/img/${pokemon}${direction}.png`);
+  imgCharacter.setAttribute(
+    "src",
+    `assets/img/characters/${settings.characterId}/${settings.characterId}${direction}.png`
+  );
 
-  if (event.key === " ") {
-    triggerRandomThunderstorm();
-  }
-
-  console.log("posY", posY);
-  console.log("posX", posX);
-}
-
-function triggerRandomThunderstorm() {
-  // Start eclair animations
-  eclairRandoms.forEach((eclairElement) => {
-    eclairElement.classList.add("eclairAnimation2");
-    setRandomPosition(eclairElement);
-  });
-
-  // Play random thunder sound
-  const thunderSound = Math.floor(Math.random() * 2) + 1;
-  const audioElement = document.getElementById(
-    `thunder${thunderSound}`
-  ) as HTMLAudioElement;
-  audioElement.play();
-
-  // Reset after animation ends
-  setTimeout(() => {
-    audioElement.pause();
-    audioElement.currentTime = 0;
-    eclairRandoms.forEach((eclairElement) => {
-      eclairElement.classList.remove("eclairAnimation2");
-    });
-  }, 2000);
-
-  // Apply effects to the environment
-  applyEclairEffects();
-}
-
-function setRandomPosition(element: HTMLElement) {
-  const randomX = Math.random() * settings.arenaWidth - 200;
-  const randomY = Math.random() * settings.arenaHeight - 200;
-  element.style.top = `${randomX}px`;
-  element.style.left = `${randomY}px`;
-}
-
-function applyEclairEffects() {
-  eclair.classList.add("eclairAnimation");
-
-  effetsEclair.arena.style.filter =
-    "brightness(0.3)contrast(110%)hue-rotate(90deg)";
-  effetsEclair.sea.style.filter =
-    "brightness(2)contrast(110%)hue-rotate(-90deg)";
-  imgPikachu.style.filter = "brightness(2)contrast(110%)";
-  effetsEclair.arena.style.transform = "scale(1.03)";
-
-  setTimeout(() => {
-    // Reset effects after the animation ends
-    eclair.classList.remove("eclairAnimation");
-    effetsEclair.arena.style.filter = "brightness(1)";
-    effetsEclair.sea.style.filter = "brightness(1)";
-    effetsEclair.arena.style.transform = "scale(1)";
-    imgPikachu.style.filter = "brightness(1)";
-  }, 500);
+  // console.log("posY", posY);
+  // console.log("posX", posX);
 }

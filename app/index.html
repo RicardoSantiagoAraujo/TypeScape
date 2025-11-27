@@ -13,7 +13,7 @@
 
 
 <body>
-  <audio id="themePokemon" src="assets/audio/theme.mp3"></audio>
+
   <audio id="thunder1" src="assets/audio/mixkit-cinematic-impact-thunder-1286.wav"></audio>
   <audio id="thunder2" src="assets/audio/mixkit-cinematic-thunder-1283.wav"></audio>
 
@@ -21,7 +21,9 @@
   <div id="formStart">
     <h2>TypeScape</h2>
     <h4>Enter your character name:</h4>
-    <input id="inputName" type="text" placeholder="pikachu" maxlength="12">
+    <input id="inputName" type="text" placeholder="Name" maxlength="12">
+    <div id="availableCharacters">
+    </div>
     <input id="btnStart" disabled type="button" value="Start !">
   </div>
 
@@ -29,20 +31,20 @@
   <div id="arena">
     <div id="effetEclairArena"> </div>
 
-    <div id="pikachu">
-      <img id="imgPikachu" src="assets/img/pikachuDown.png">
-      <img id="eclair" src="assets/img/eclair.png">
+    <div id="character">
+      <img id="imgCharacter">
+      <img id="actionCharacterEffect" src="assets/img/eclair.png">
     </div>
 
-    <div class="thunderstorm">
-      <img id="eclairRandom1" src="assets/img/eclair2.png">
-      <img id="eclairRandom2" src="assets/img/eclair3.png">
-      <img id="eclairRandom3" src="assets/img/eclair2.png">
-      <img id="eclairRandom4" src="assets/img/eclair3.png">
-      <img id="eclairRandom5" src="assets/img/eclair2.png">
-      <img id="eclairRandom6" src="assets/img/eclair3.png">
-      <img id="eclairRandom7" src="assets/img/eclair2.png">
-      <img id="eclairRandom8" src="assets/img/eclair3.png">
+    <div id="actionArenaEffect">
+      <img class="eclairRandom" src="assets/img/eclair2.png">
+      <img class="eclairRandom" src="assets/img/eclair3.png">
+      <img class="eclairRandom" src="assets/img/eclair2.png">
+      <img class="eclairRandom" src="assets/img/eclair3.png">
+      <img class="eclairRandom" src="assets/img/eclair2.png">
+      <img class="eclairRandom" src="assets/img/eclair3.png">
+      <img class="eclairRandom" src="assets/img/eclair2.png">
+      <img class="eclairRandom" src="assets/img/eclair3.png">
     </div>
 
 
@@ -51,18 +53,23 @@
   <div id="instructions">
     <h4>Instructions</h4>
     <table>
-    <tr>
-      <th class="action">Action</th>
-      <th class="input">Input</th>
-    </tr>
-    <tr>
-      <td class="action">Movement</td>
-      <td class="input">Arrow keys</td>
-    </tr>
-    <tr>
-      <td class="action">Attack</td>
-      <td class="input">Spacebar</td>
-    </tr>
+      <tr>
+        <th class="action">Action</th>
+        <th class="input">Input</th>
+      </tr>
+      <tr>
+        <td class="action">Movement</td>
+        <td class="input">Arrow keys</td>
+      </tr>
+      <tr>
+        <td class="action">Attack</td>
+        <td class="input">Spacebar</td>
+      </tr>
     </table>
+  </div>
+
+  <div id="audioElements">
+    <audio id="themeMusic" src="assets/audio/themePokemon.mp3" loop></audio>
+    <input type="button" id="btnMute" value="Mute Audio">
   </div>
 </body>

@@ -63,3 +63,27 @@ body {
   }
 
 }
+
+
+#audioElements {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+
+  #btnMute {
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 120px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  #btnMute:hover {
+    background-color: #0056b3;
+  }
+}
