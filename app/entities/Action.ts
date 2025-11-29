@@ -1,6 +1,8 @@
 import { elements as el } from "../utils/Elements.js";
 import { settings } from "../settings.js";
-import { timeFormat } from "../utils/helper.js";
+/**
+ * Class for main player action
+ */
 export class Action {
   actionAvailable: boolean;
   numberOfEffects: number;
@@ -99,16 +101,23 @@ export class Action {
     }
   }
 
+  timeFormat(time: number): string {
+    return String(Math.round((time / 1000) * 100) / 100) + " s";
+  }
+
+  /**
+   * Function to reset skill cooldown countdown
+   */
   restartCountdown() {
     var countdownTime = settings.actionCooldown;
     el.actionCooldownTimer.classList.remove("ready");
-    el.actionCooldownTimer.innerHTML = timeFormat(countdownTime);
+    el.actionCooldownTimer.innerHTML = this.timeFormat(countdownTime);
     var stepSize = 100;
-    const interval = setInterval(function () {
+    const interval = setInterval(() => {
       countdownTime = countdownTime - stepSize; // Decrease the time by 1 second
 
       // Display the remaining time
-      el.actionCooldownTimer.innerHTML = timeFormat(countdownTime);
+      el.actionCooldownTimer.innerHTML = this.timeFormat(countdownTime);
 
       // If the countdown reaches 0, stop the timer and display "EXPIRED"
       if (countdownTime <= 0) {

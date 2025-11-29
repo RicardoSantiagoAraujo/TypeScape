@@ -1,14 +1,20 @@
 {
   "devDependencies": {
+    "concurrently": "^9.2.1",
+    "lite-server": "^2.6.1",
     "sass": "^1.90.0",
+    "typedoc": "^0.28.15",
     "typescript": "^5.9.2"
   },
   "scripts": {
     "build:packages": "npm install --prefix ./",
     "build:ts": "tsc --project ./",
     "build:scss": "sass --no-source-map --update .:.",
-    "build": "npm run build:packages && npm run build:ts && npm run build:scss"
-  },
-  "dependencies": {
+    "build": "npm run build:packages && npm run build:ts && npm run build:scss",
+    "dev:ts": "tsc --watch --project ./",
+    "dev:scss": "sass --watch .:.",
+    "dev:server": "lite-server  --port 3000",
+    "dev":  "concurrently \"npm run dev:ts\" \"npm run dev:scss\" \"npm run dev:server\""
+
   }
 }

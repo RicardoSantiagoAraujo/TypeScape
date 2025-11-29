@@ -1,0 +1,6 @@
+{
+  "entryPoints": ["app/index.ts"],  // path to your main TypeScript file
+  "out": "docs",                    // output directory for the documentation
+  "exclude": "**/test/**/*",        // exclude test files or folders
+  "theme": "default"                // optional: use a custom theme for the docs
+}
