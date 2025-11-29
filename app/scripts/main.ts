@@ -14,7 +14,7 @@ import {
 import "./action.js"; // Import actions to initialize them
 var gameState: "started" | "paused" = "paused";
 const characterName: string = settings.characterName;
-const movementSpeed: number = settings.MovementDistancePerClick;
+const movementSpeed: number = settings.movementDistancePerClick;
 let posX: number = settings.startingPositionX;
 let posY: number = settings.startingPositionY;
 let direction: string;
