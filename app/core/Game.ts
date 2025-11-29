@@ -3,6 +3,7 @@ import { Player } from "../entities/Player.js";
 import { Enemy } from "../entities/Enemy.js";
 import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
+import { getRandomNumberBetween } from "../utils/helper.js";
 
 /**
  * Represents the game state and logic
@@ -105,7 +106,13 @@ export class Game {
       console.log("Starting Round");
       // console.log(this.player)
       this.player.render();
-      const enemy = new Enemy(360, 340, 50, 40, 25);
+      const enemy = new Enemy(
+        getRandomNumberBetween(0, this.settings.arenaWidth),
+        getRandomNumberBetween(0, this.settings.arenaHeight),
+        50,
+        40,
+        25
+      );
       // Check if the player is colliding with the enemy
 
       document.addEventListener("keydown", (event) => {
