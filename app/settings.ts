@@ -14,5 +14,5 @@ export var settings = new Settings({
   requireCharacterCreation: true,
   actionCooldown: 3000,
   actionEffect: ["assets/img/eclair2.png", "assets/img/eclair3.png"],
-  actionEffectNumber: 15,
+  actionEffectNumber: 3,
 });

@@ -45,7 +45,7 @@ export class Game {
       };
     } else {
       this.startRound(new MouseEvent("click"));
-    } 
+    }
   }
 
   toggleStartButton(): void {
@@ -102,6 +102,7 @@ export class Game {
       document.addEventListener("keydown", (event) => {
         // console.log("Listening for player movement", event);
         this.player.moveCharacter(event);
+        this.player.performAction(event);
       });
     }
   }

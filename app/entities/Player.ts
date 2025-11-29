@@ -1,6 +1,8 @@
 import { elements as el } from "../utils/Elements.js";
+import { Action } from "./Action.js";
 import { settings } from "../settings.js";
 export class Player {
+  public action: Action;
   constructor(
     public name: string,
     public id: string,
@@ -10,7 +12,12 @@ export class Player {
     public y: number,
     public speed: number,
     public direction: "Up" | "Down" | "Left" | "Right"
-  ) {}
+  ) {
+    this.action = new Action(
+      settings.actionEffectNumber,
+      settings.actionCooldown
+    );
+  }
 
   moveCharacter(event: KeyboardEvent) {
     if (event.key === "ArrowDown" || event.key === "s") {
@@ -38,6 +45,13 @@ export class Player {
       Math.min(settings.arenaHeight - settings.characterHeight, this.y)
     );
     this.render();
+  }
+
+  performAction(event: KeyboardEvent) {
+    if (event.key === " ") {
+      console.log("Performing action");
+      this.action.triggerAction(event);
+    }
   }
 
   render() {

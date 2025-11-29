@@ -17,9 +17,11 @@ export const elements = {
     arena: document.getElementById("effetActionArena") as HTMLDivElement,
     sea: document.getElementById("effetActionSea") as HTMLDivElement,
   },
-  actionRandoms: Array.from(
-    document.querySelectorAll(`.ActionRandom`) as NodeListOf<HTMLElement>
-  ),
+  actionRandomsFunc: () => {
+    return Array.from(
+      document.querySelectorAll(`.ActionRandom`) as NodeListOf<HTMLElement>
+    );
+  },
   actionCooldownTimer: document.querySelector(
     "#actionCooldownTimer .timer"
   ) as HTMLElement,
