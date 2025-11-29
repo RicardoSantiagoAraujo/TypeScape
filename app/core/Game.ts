@@ -1,5 +1,6 @@
 import { Arena } from "../entities/Arena.js";
 import { Player } from "../entities/Player.js";
+import { Enemy } from "../entities/Enemy.js";
 import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
 
@@ -104,10 +105,18 @@ export class Game {
       console.log("Starting Round");
       // console.log(this.player)
       this.player.render();
+      const enemy = new Enemy(260, 40, 50, 50, 25);
+      // Check if the player is colliding with the enemy
+
       document.addEventListener("keydown", (event) => {
         // console.log("Listening for player movement", event);
         this.player.moveCharacter(event);
         this.player.performAction(event);
+        if (this.player.isCollidingWith(enemy)) {
+          console.log("Collision detected!");
+        } else {
+          console.log("No collision.");
+        }
       });
     }
   }

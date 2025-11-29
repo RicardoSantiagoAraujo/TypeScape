@@ -1,8 +1,10 @@
 import { elements as el } from "../utils/Elements.js";
 import { Action } from "./Action.js";
 import { settings } from "../settings.js";
-export class Player {
+import { Hitbox } from "./Hitbox.js";
+export class Player extends Hitbox{
   public action: Action;
+
   constructor(
     public name: string,
     public id: string,
@@ -13,6 +15,7 @@ export class Player {
     public speed: number,
     public direction: "Up" | "Down" | "Left" | "Right"
   ) {
+    super(x, y, width, height);  // Call the Hitbox constructor
     this.action = new Action(
       settings.actionEffectNumber,
       settings.actionCooldown
