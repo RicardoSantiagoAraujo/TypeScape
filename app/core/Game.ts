@@ -109,8 +109,8 @@ export class Game {
       const enemy = new Enemy(
         getRandomNumberBetween(0, this.settings.arenaWidth),
         getRandomNumberBetween(0, this.settings.arenaHeight),
-        50,
-        40,
+        getRandomNumberBetween(30, 150),
+        getRandomNumberBetween(30, 150),
         25
       );
       // Check if the player is colliding with the enemy
