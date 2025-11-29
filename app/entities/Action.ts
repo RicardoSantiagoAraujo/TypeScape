@@ -1,7 +1,9 @@
 import { elements as el } from "../utils/Elements.js";
 import { settings } from "../settings.js";
+
 /**
  * Class for main player action
+ * @class
  */
 export class Action {
   actionAvailable: boolean;

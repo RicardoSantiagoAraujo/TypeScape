@@ -2,6 +2,11 @@ import { Arena } from "../entities/Arena.js";
 import { Player } from "../entities/Player.js";
 import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
+
+/**
+ * Represents the game state and logic
+ * @class
+ */
 export class Game {
   arena: Arena;
   player: Player;

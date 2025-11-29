@@ -14,7 +14,8 @@
     "dev:ts": "tsc --watch --project ./",
     "dev:scss": "sass --watch .:.",
     "dev:server": "lite-server  --port 3000",
-    "dev":  "concurrently \"npm run dev:ts\" \"npm run dev:scss\" \"npm run dev:server\""
+    "dev":  "concurrently \"npm run dev:ts\" \"npm run dev:scss\" \"npm run dev:server\"",
+    "docs": "npx typedoc"
 
   }
 }

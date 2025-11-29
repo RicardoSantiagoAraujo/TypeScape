@@ -11,3 +11,9 @@ npm run dev
 ```bash
 npx typedoc
 ```
+
+or
+
+```bash
+npm run docs
+```
