@@ -1,4 +1,5 @@
 import { settings } from "./settings.js";
+import "./init.js";
 import {
   character,
   arena,

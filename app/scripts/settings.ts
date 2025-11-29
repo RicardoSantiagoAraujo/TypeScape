@@ -14,5 +14,7 @@ export var settings = {
     return (this.arenaHeight - this.characterHeight) / 2;
   },
   requireCharacterCreation: true,
-  actionCooldown: 3000
+  actionCooldown: 3000,
+  actionEffect: ["assets/img/eclair2.png","assets/img/eclair3.png"],
+  actionEffectNumber: 5,
 };
