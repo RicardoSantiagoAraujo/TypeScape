@@ -16,22 +16,16 @@ export class Enemy extends Hitbox {
 
     const div = document.createElement("div");
     // Set the text content of the div
-    div.textContent = "ENEMY";
+    div.textContent = "";
 
-    // Add a class to the div for styling purposes (optional)
-    div.classList.add("my-div");
+    // Add a class to the div for styling purposes
+    div.classList.add("enemy");
 
-    // Set styles directly on the div (optional)
-    div.style.position = "absolute";
-    div.style.backgroundColor = "lightblue";
+    // Set styles directly on the div
     div.style.left = `${this.x}px`;
     div.style.top = `${this.y}px`;
     div.style.width = `${this.width}px`;
     div.style.height = `${this.height}px`;
-    div.style.border = "2px solid #ff0000ff";
-    div.style.borderRadius = "8px";
-    div.style.fontSize = "16px";
-    div.style.textAlign = "center";
 
     // Append the div to the body of the document
     el.arena.appendChild(div);

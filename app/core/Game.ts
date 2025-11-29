@@ -105,7 +105,7 @@ export class Game {
       console.log("Starting Round");
       // console.log(this.player)
       this.player.render();
-      const enemy = new Enemy(260, 40, 50, 50, 25);
+      const enemy = new Enemy(360, 340, 50, 40, 25);
       // Check if the player is colliding with the enemy
 
       document.addEventListener("keydown", (event) => {
@@ -114,8 +114,6 @@ export class Game {
         this.player.performAction(event);
         if (this.player.isCollidingWith(enemy)) {
           console.log("Collision detected!");
-        } else {
-          console.log("No collision.");
         }
       });
     }
