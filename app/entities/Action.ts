@@ -65,18 +65,18 @@ export class Action {
   applyActionEffects() {
     el.actionCharacterEffect.classList.add("actionCharacterEffect--active");
 
-    el.effetsAction.arena.style.filter =
+    el.sufaceTextures.arena.style.filter =
       "brightness(0.3)contrast(110%)hue-rotate(90deg)";
-    el.effetsAction.sea.style.filter =
+    el.sufaceTextures.sea.style.filter =
       "brightness(2)contrast(110%)hue-rotate(-90deg)";
     el.imgCharacter.style.filter = "brightness(2)contrast(110%)";
-    el.effetsAction.arena.style.transform = "scale(1.03)";
+    el.sufaceTextures.arena.style.transform = "scale(1.03)";
 
     setTimeout(() => {
       // Reset effects after the animation ends
-      el.effetsAction.arena.style.filter = "brightness(1)";
-      el.effetsAction.sea.style.filter = "brightness(1)";
-      el.effetsAction.arena.style.transform = "scale(1)";
+      el.sufaceTextures.arena.style.filter = "brightness(1)";
+      el.sufaceTextures.sea.style.filter = "brightness(1)";
+      el.sufaceTextures.arena.style.transform = "scale(1)";
       el.imgCharacter.style.filter = "brightness(1)";
     }, 500);
     setTimeout(() => {

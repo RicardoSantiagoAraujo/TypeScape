@@ -13,9 +13,9 @@ export const elements = {
   actionCharacterEffect: document.getElementById(
     "actionCharacterEffect"
   ) as HTMLDivElement,
-  effetsAction: {
-    arena: document.getElementById("effetActionArena") as HTMLDivElement,
-    sea: document.getElementById("effetActionSea") as HTMLDivElement,
+  sufaceTextures: {
+    arena: document.getElementById("arenaTexture") as HTMLDivElement,
+    sea: document.getElementById("outerTexture") as HTMLDivElement,
   },
   actionRandomsFunc: () => {
     return Array.from(
