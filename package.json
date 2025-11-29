@@ -15,7 +15,8 @@
     "dev:scss": "sass --watch .:.",
     "dev:server": "lite-server  --port 3000",
     "dev":  "concurrently \"npm run dev:ts\" \"npm run dev:scss\" \"npm run dev:server\"",
-    "docs": "npx typedoc"
+    "docs": "npx typedoc",
+    "docs:publish": "npm run build:packages && npx typedoc"
 
   }
 }
