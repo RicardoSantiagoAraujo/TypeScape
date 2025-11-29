@@ -1,8 +1,8 @@
 import { Settings } from "./core/Settings.js";
 
 export var settings = new Settings({
-  characterName: "Character",
-  characterId: "pikachu",
+  defaultCharacterName: "Default Name",
+  defaultCharacterId: "pikachu",
   availableCharacters: ["pikachu", "farfetchd"],
   movementDistancePerClick: 50,
   arenaWidth: 550,
@@ -16,4 +16,3 @@ export var settings = new Settings({
   actionEffect: ["assets/img/eclair2.png", "assets/img/eclair3.png"],
   actionEffectNumber: 15,
 });
-

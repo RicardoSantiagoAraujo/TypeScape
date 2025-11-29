@@ -7,8 +7,7 @@ import {
 } from "./elements.js";
 import { settings } from "./settings.js";
 
-var actionAvailable: boolean = true;
-var actionDuration: 5000;
+var actionAvailable: boolean = true; 
 
 function triggerRandomThunderstorm() {
   ActionRandoms.forEach((ActionElement) => {

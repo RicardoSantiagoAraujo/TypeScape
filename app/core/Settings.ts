@@ -1,7 +1,7 @@
 // core/Settings.ts
 export interface SettingsConfig {
-  characterName: string;
-  characterId: string;
+  defaultCharacterName: string;
+  defaultCharacterId: string;
   availableCharacters: string[];
   movementDistancePerClick: number;
   arenaWidth: number;
@@ -17,14 +17,14 @@ export interface SettingsConfig {
 }
 
 export class Settings {
-  characterName: string;
-  characterId: string;
+  defaultCharacterName: string;
+  defaultCharacterId: string;
   availableCharacters: string[];
   movementDistancePerClick: number;
   arenaWidth: number;
   arenaHeight: number;
-  startingPositionX: number | null;
-  startingPositionY: number | null;
+  startingPositionX: number;
+  startingPositionY: number;
   characterHeight: number;
   characterWidth: number;
   requireCharacterCreation: boolean;
@@ -33,8 +33,8 @@ export class Settings {
   actionEffectNumber: number;
 
   constructor(config: SettingsConfig) {
-    this.characterName = config.characterName;
-    this.characterId = config.characterId;
+    this.defaultCharacterName = config.defaultCharacterName;
+    this.defaultCharacterId = config.defaultCharacterId;
     this.availableCharacters = config.availableCharacters;
     this.movementDistancePerClick = config.movementDistancePerClick;
     this.arenaWidth = config.arenaWidth;
