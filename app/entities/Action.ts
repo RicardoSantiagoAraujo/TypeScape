@@ -45,7 +45,7 @@ export class Action {
       el.actionRandomsFunc().forEach((actionElement) => {
         actionElement.classList.remove("actionCharacterEffect--active");
       });
-    }, 2000);
+    }, this.cooldownMilliseconds);
 
     // Apply effects to the environment
     this.applyActionEffects();
@@ -70,14 +70,17 @@ export class Action {
 
     setTimeout(() => {
       // Reset effects after the animation ends
-      el.actionCharacterEffect.classList.remove(
-        "actionCharacterEffect--active"
-      );
       el.effetsAction.arena.style.filter = "brightness(1)";
       el.effetsAction.sea.style.filter = "brightness(1)";
       el.effetsAction.arena.style.transform = "scale(1)";
       el.imgCharacter.style.filter = "brightness(1)";
     }, 500);
+    setTimeout(() => {
+      // Once cooldown is finished, make animation available
+      el.actionCharacterEffect.classList.remove(
+        "actionCharacterEffect--active"
+      );
+    }, this.cooldownMilliseconds);
   }
 
   triggerAction(event: KeyboardEvent) {
@@ -88,7 +91,7 @@ export class Action {
         el.actionRandomsFunc().forEach((action) => {
           action.classList.remove("actionArenaEffect--active");
         });
-      }, 500);
+      }, this.cooldownMilliseconds);
       this.actionAvailable = false;
       setTimeout(() => {
         this.actionAvailable = true;
