@@ -22,13 +22,13 @@ export const actionCharacterEffect = document.getElementById(
   "actionCharacterEffect"
 ) as HTMLDivElement;
 
-export const effetsEclair = {
-  arena: document.getElementById("effetEclairArena") as HTMLDivElement,
-  sea: document.getElementById("effetEclairSea") as HTMLDivElement,
+export const effetsAction = {
+  arena: document.getElementById("effetActionArena") as HTMLDivElement,
+  sea: document.getElementById("effetActionSea") as HTMLDivElement,
 };
 
-export const eclairRandoms = Array.from(
-  document.querySelectorAll(`.eclairRandom`) as NodeListOf<HTMLElement>
+export const ActionRandoms = Array.from(
+  document.querySelectorAll(`.ActionRandom`) as NodeListOf<HTMLElement>
 );
 
 export const actionCooldownTimer = document.querySelector(

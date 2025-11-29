@@ -41,7 +41,7 @@
     transform: translate(-50%, -50%);
     z-index: 9999;
 
-    .eclairRandom {
+    .ActionRandom {
         opacity: 0;
         transition: opacity 0.5s;
         position: absolute;
@@ -50,7 +50,7 @@
         transform: translate(-50%, -50%);
     }
 
-    .eclairRandom.actionArenaEffect--active {
+    .ActionRandom.actionArenaEffect--active {
         transform-origin: center;
         animation: actionArenaEffect 1s forwards;
     }
@@ -113,7 +113,7 @@
     width: 100px;
   } */
 
-#effetEclairArena {
+#effetActionArena {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -157,7 +157,7 @@
     ;
 }
 
-#effetEclairSea {
+#effetActionSea {
     z-index: -1;
     position: absolute;
     width: 100%;
@@ -193,10 +193,12 @@
     width: calc($timer-radius * 2);
     background-color: rgba(252, 251, 239, 0.882);
     border-radius: $timer-radius;
-    .legend{
+
+    .legend {
         width: $timer-radius;
         text-align: center;
     }
+
     .timer {
         display: flex;
         align-items: center;

@@ -1,7 +1,7 @@
 import {
   actionCharacterEffect,
-  effetsEclair,
-  eclairRandoms,
+  effetsAction,
+  ActionRandoms,
   imgCharacter,
   actionCooldownTimer,
 } from "./elements.js";
@@ -11,9 +11,9 @@ var actionAvailable: boolean = true;
 var actionDuration: 5000;
 
 function triggerRandomThunderstorm() {
-  eclairRandoms.forEach((eclairElement) => {
-    eclairElement.classList.add("actionArenaEffect--active");
-    setRandomPosition(eclairElement);
+  ActionRandoms.forEach((ActionElement) => {
+    ActionElement.classList.add("actionArenaEffect--active");
+    setRandomPosition(ActionElement);
   });
 
   // Play random thunder sound
@@ -27,13 +27,13 @@ function triggerRandomThunderstorm() {
   setTimeout(() => {
     audioElement.pause();
     audioElement.currentTime = 0;
-    eclairRandoms.forEach((eclairElement) => {
-      eclairElement.classList.remove("actionCharacterEffect--active");
+    ActionRandoms.forEach((ActionElement) => {
+      ActionElement.classList.remove("actionCharacterEffect--active");
     });
   }, 2000);
 
   // Apply effects to the environment
-  applyEclairEffects();
+  applyActionEffects();
 }
 
 function setRandomPosition(element: HTMLElement) {
@@ -43,22 +43,22 @@ function setRandomPosition(element: HTMLElement) {
   element.style.left = `${randomX}px`;
 }
 
-function applyEclairEffects() {
+function applyActionEffects() {
   actionCharacterEffect.classList.add("actionCharacterEffect--active");
 
-  effetsEclair.arena.style.filter =
+  effetsAction.arena.style.filter =
     "brightness(0.3)contrast(110%)hue-rotate(90deg)";
-  effetsEclair.sea.style.filter =
+  effetsAction.sea.style.filter =
     "brightness(2)contrast(110%)hue-rotate(-90deg)";
   imgCharacter.style.filter = "brightness(2)contrast(110%)";
-  effetsEclair.arena.style.transform = "scale(1.03)";
+  effetsAction.arena.style.transform = "scale(1.03)";
 
   setTimeout(() => {
     // Reset effects after the animation ends
     actionCharacterEffect.classList.remove("actionCharacterEffect--active");
-    effetsEclair.arena.style.filter = "brightness(1)";
-    effetsEclair.sea.style.filter = "brightness(1)";
-    effetsEclair.arena.style.transform = "scale(1)";
+    effetsAction.arena.style.filter = "brightness(1)";
+    effetsAction.sea.style.filter = "brightness(1)";
+    effetsAction.arena.style.transform = "scale(1)";
     imgCharacter.style.filter = "brightness(1)";
   }, 500);
 }
@@ -71,8 +71,8 @@ function onAction(event: KeyboardEvent) {
       triggerRandomThunderstorm();
       restartCountdown();
       setTimeout(() => {
-        eclairRandoms.forEach((eclair) => {
-          eclair.classList.remove("actionArenaEffect--active");
+        ActionRandoms.forEach((Action) => {
+          Action.classList.remove("actionArenaEffect--active");
         });
       }, 500);
       actionAvailable = false;
