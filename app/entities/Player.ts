@@ -2,12 +2,14 @@ import { elements as el } from "../utils/Elements.js";
 import { Action } from "./Action.js";
 import { settings } from "../settings.js";
 import { Hitbox } from "./Hitbox.js";
-export class Player extends Hitbox{
+export class Player extends Hitbox {
   public action: Action;
+  public health: number;
 
   constructor(
     public name: string,
     public id: string,
+    public heath: number,
     public width: number,
     public height: number,
     public x: number,
@@ -15,7 +17,8 @@ export class Player extends Hitbox{
     public speed: number,
     public direction: "Up" | "Down" | "Left" | "Right"
   ) {
-    super(x, y, width, height);  // Call the Hitbox constructor
+    super(x, y, width, height); // Call the Hitbox constructor
+    this.health = heath;
     this.action = new Action(
       settings.actionEffectNumber,
       settings.actionCooldown

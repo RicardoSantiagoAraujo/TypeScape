@@ -17,6 +17,11 @@
         width: var.$character-width;
     }
 
+    &.damaged{
+        background: radial-gradient(red 40%,  transparent 80% 100%);
+        filter: blur(2px)drop-shadow(0 0 3px black);
+    }
+
     &::before {
         content: "";
         position: absolute;

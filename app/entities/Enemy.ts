@@ -3,23 +3,26 @@ import { elements as el } from "../utils/Elements.js";
 
 export class Enemy extends Hitbox {
   damage: number;
+  spawnDelay: number;
 
   constructor(
     x: number,
     y: number,
     width: number,
     height: number,
-    damage: number
+    damage: number,
+    spawnDelay: number
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
     this.damage = damage;
+    this.spawnDelay = spawnDelay;
 
     const div = document.createElement("div");
     // Set the text content of the div
     div.textContent = "";
 
     // Add a class to the div for styling purposes
-    div.classList.add("enemy");
+    div.classList.add("enemy", "spawning");
 
     // Set styles directly on the div
     div.style.left = `${this.x}px`;
@@ -29,6 +32,11 @@ export class Enemy extends Hitbox {
 
     // Append the div to the body of the document
     el.arena.appendChild(div);
+
+    // Add style for fully spawned
+    setTimeout(() => {
+      div.classList.remove("spawning");
+    }, this.spawnDelay);
   }
 
   // Additional enemy-specific behavior

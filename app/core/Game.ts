@@ -23,6 +23,7 @@ export class Game {
     this.player = new Player(
       settings.defaultCharacterName,
       settings.defaultCharacterId,
+      3,
       settings.characterHeight,
       settings.characterWidth,
       settings.startingPositionX,
@@ -41,6 +42,7 @@ export class Game {
         this.player = new Player(
           el.inputName.value,
           this.player.id,
+          3,
           settings.characterHeight,
           settings.characterWidth,
           settings.startingPositionX,
@@ -111,7 +113,8 @@ export class Game {
         getRandomNumberBetween(0, this.settings.arenaHeight),
         getRandomNumberBetween(30, 150),
         getRandomNumberBetween(30, 150),
-        25
+        25,
+        2000
       );
       // Check if the player is colliding with the enemy
 
@@ -121,6 +124,11 @@ export class Game {
         this.player.performAction(event);
         if (this.player.isCollidingWith(enemy)) {
           console.log("Collision detected!");
+          console.log("Player health: ", this.player.health);
+          this.player.health = this.player.health - 1;
+          el.character.classList.add("damaged");
+        } else {
+          el.character.classList.remove("damaged");
         }
       });
     }

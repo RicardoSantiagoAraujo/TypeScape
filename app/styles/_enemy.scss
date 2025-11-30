@@ -10,4 +10,8 @@
     border-radius: 8px;
     font-size: 16p;
     text-align: center;
+    transition: 0.3s;
+    &.spawning{
+        filter: brightness(10)blur(5px)drop-shadow(0 0 10px white);
+    }
 }
