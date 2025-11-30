@@ -9,6 +9,7 @@ export const elements = {
   audioElement: document.getElementById(`themeMusic`) as HTMLAudioElement,
   formStart: document.getElementById("formStart") as HTMLDivElement,
   pauseMenu: document.getElementById("pauseMenu") as HTMLDivElement,
+  gameOverMenu: document.getElementById("gameOverMenu") as HTMLDivElement,
   arena: document.getElementById("arena") as HTMLDivElement,
   character: document.getElementById("character") as HTMLDivElement,
   actionCharacterEffect: document.getElementById(

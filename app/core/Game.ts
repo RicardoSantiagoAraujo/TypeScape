@@ -99,6 +99,17 @@ export class Game {
     this._state = newState;
     if (newState == "game_over") {
       console.log("Game over !");
+      el.gameOverMenu.style.display = "block";
+      setTimeout(() => {
+        this.player.x = this.settings.startingPositionX;
+        this.player.y = this.settings.startingPositionY;
+        this.player.render();
+        el.gameOverMenu.style.display = "none";
+        this.state = "ongoing";
+        this.player.hitpoints = this.player.hitpointsStarting;
+        el.character.classList.remove("dead");
+        el.character.classList.remove("damaged");
+      }, 1000);
     }
   }
 
@@ -109,11 +120,11 @@ export class Game {
       if (this._state === "ongoing") {
         console.log("Pause game !");
         this.state = "paused"; // Set the game state to "paused"
-        el.pauseMenu.style.display = "block"
+        el.pauseMenu.style.display = "block";
       } else if (this._state === "paused") {
         console.log("Resume game !");
         this.state = "ongoing"; // Resume the game
-        el.pauseMenu.style.display = "none"
+        el.pauseMenu.style.display = "none";
       }
     }
   }
@@ -134,15 +145,18 @@ export class Game {
       console.log("Starting Round");
       // console.log(this.player)
       this.player.render();
-      const enemy = new Enemy(
-        getRandomNumberBetween(0, this.settings.arenaWidth),
-        getRandomNumberBetween(0, this.settings.arenaHeight),
-        getRandomNumberBetween(30, 150),
-        getRandomNumberBetween(30, 150),
-        25,
-        2000
-      );
-      // Check if the player is colliding with the enemy
+      var enemyList: Enemy[] = [];
+      for (let i = 0; i < 5; i++) {
+        const enemy = new Enemy(
+          getRandomNumberBetween(0, this.settings.arenaWidth),
+          getRandomNumberBetween(0, this.settings.arenaHeight),
+          getRandomNumberBetween(30, 150),
+          getRandomNumberBetween(30, 150),
+          25,
+          2000
+        );
+        enemyList.push(enemy);
+      }
 
       document.addEventListener("keydown", (event) => {
         if (this._state == "game_over") {
@@ -154,12 +168,14 @@ export class Game {
         }
         this.player.moveCharacter(event);
         this.player.performAction(event);
-        if (this.player.isCollidingWith(enemy)) {
-          console.log("Collision detected!");
-          this.state = this.player.takeDamage();
-          el.character.classList.add("damaged");
-        } else {
-          el.character.classList.remove("damaged");
+        for (let enemy of enemyList) {
+          if (this.player.isCollidingWith(enemy)) {
+            console.log("Collision detected!");
+            this.state = this.player.takeDamage();
+            el.character.classList.add("damaged");
+          } else {
+            el.character.classList.remove("damaged");
+          }
         }
       });
     }

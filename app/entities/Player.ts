@@ -5,11 +5,12 @@ import { Hitbox } from "./Hitbox.js";
 import { GameState } from "../core/Game.js";
 export class Player extends Hitbox {
   public action: Action;
+  public hitpoints: number;
 
   constructor(
     public name: string,
     public id: string,
-    public hitpoints: number,
+    public hitpointsStarting: number,
     public width: number,
     public height: number,
     public x: number,
@@ -18,7 +19,8 @@ export class Player extends Hitbox {
     public direction: "Up" | "Down" | "Left" | "Right"
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
-    this.hitpoints = hitpoints;
+    this.hitpointsStarting = hitpointsStarting;
+    this.hitpoints = hitpointsStarting;
     this.action = new Action(
       settings.actionEffectNumber,
       settings.actionCooldown
