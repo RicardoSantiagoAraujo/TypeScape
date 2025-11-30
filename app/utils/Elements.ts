@@ -8,6 +8,7 @@ export const elements = {
   btnMute: document.getElementById("btnMute") as HTMLButtonElement,
   audioElement: document.getElementById(`themeMusic`) as HTMLAudioElement,
   formStart: document.getElementById("formStart") as HTMLDivElement,
+  pauseMenu: document.getElementById("pauseMenu") as HTMLDivElement,
   arena: document.getElementById("arena") as HTMLDivElement,
   character: document.getElementById("character") as HTMLDivElement,
   actionCharacterEffect: document.getElementById(

@@ -2,14 +2,14 @@ import { elements as el } from "../utils/Elements.js";
 import { Action } from "./Action.js";
 import { settings } from "../settings.js";
 import { Hitbox } from "./Hitbox.js";
+import { GameState } from "../core/Game.js";
 export class Player extends Hitbox {
   public action: Action;
-  public health: number;
 
   constructor(
     public name: string,
     public id: string,
-    public heath: number,
+    public hitpoints: number,
     public width: number,
     public height: number,
     public x: number,
@@ -18,7 +18,7 @@ export class Player extends Hitbox {
     public direction: "Up" | "Down" | "Left" | "Right"
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
-    this.health = heath;
+    this.hitpoints = hitpoints;
     this.action = new Action(
       settings.actionEffectNumber,
       settings.actionCooldown
@@ -57,6 +57,19 @@ export class Player extends Hitbox {
     if (event.key === " ") {
       console.log("Performing action");
       this.action.triggerAction(event);
+    }
+  }
+
+  public takeDamage(): GameState {
+    console.log("Player health: ", this.hitpoints);
+    this.hitpoints = this.hitpoints - 1;
+    if (this.hitpoints <= 0) {
+      el.character.classList.add("dead");
+      el.imgCharacter.src =
+        "https://p7.hiclipart.com/preview/415/127/691/8-bit-color-skull-pixel-art-skull.jpg";
+      return "game_over";
+    } else {
+      return "ongoing";
     }
   }
 

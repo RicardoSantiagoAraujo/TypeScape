@@ -21,6 +21,10 @@
         background: radial-gradient(red 40%,  transparent 80% 100%);
         filter: blur(2px)drop-shadow(0 0 3px black);
     }
+    &.dead{
+        background: radial-gradient(rgb(0, 0, 0) 50%,  transparent 80% 100%);
+        filter: blur(2px)drop-shadow(0 0 10px black);
+    }
 
     &::before {
         content: "";

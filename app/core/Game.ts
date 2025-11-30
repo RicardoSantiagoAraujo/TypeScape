@@ -5,6 +5,8 @@ import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
 import { getRandomNumberBetween } from "../utils/helper.js";
 
+export type GameState = "ongoing" | "paused" | "game_over";
+
 /**
  * Represents the game state and logic
  * @class
@@ -13,11 +15,11 @@ export class Game {
   arena: Arena;
   player: Player;
   settings: Settings;
-  state: "started" | "paused";
+  _state: GameState;
 
   constructor(settings: Settings) {
     console.log("Init game...");
-    this.state = "paused";
+    this._state = "paused";
     this.settings = settings;
     this.arena = new Arena(settings.arenaWidth, settings.arenaWidth);
     this.player = new Player(
@@ -92,6 +94,30 @@ export class Game {
     };
   }
 
+  set state(newState: GameState) {
+    // console.log(`State is changing from ${this._state} to ${newState}`);
+    this._state = newState;
+    if (newState == "game_over") {
+      console.log("Game over !");
+    }
+  }
+
+  pauseGame(event: KeyboardEvent) {
+    //// STILL NEED TO IMPLEMENT ACTUAL LOGIC
+    if (event.key === "Escape") {
+      // Pause the game
+      if (this._state === "ongoing") {
+        console.log("Pause game !");
+        this.state = "paused"; // Set the game state to "paused"
+        el.pauseMenu.style.display = "block"
+      } else if (this._state === "paused") {
+        console.log("Resume game !");
+        this.state = "ongoing"; // Resume the game
+        el.pauseMenu.style.display = "none"
+      }
+    }
+  }
+
   startRound(event: KeyboardEvent | MouseEvent) {
     if (
       event instanceof KeyboardEvent &&
@@ -103,7 +129,7 @@ export class Game {
     if (el.inputName.value != "") {
       el.formStart.style.display = "none";
       el.arena.style.display = "block";
-      this.state = "started";
+      this.state = "ongoing";
       el.audioElement.play();
       console.log("Starting Round");
       // console.log(this.player)
@@ -119,13 +145,18 @@ export class Game {
       // Check if the player is colliding with the enemy
 
       document.addEventListener("keydown", (event) => {
-        // console.log("Listening for player movement", event);
+        if (this._state == "game_over") {
+          return 0;
+        }
+        this.pauseGame(event);
+        if (this._state == "paused") {
+          return 0;
+        }
         this.player.moveCharacter(event);
         this.player.performAction(event);
         if (this.player.isCollidingWith(enemy)) {
           console.log("Collision detected!");
-          console.log("Player health: ", this.player.health);
-          this.player.health = this.player.health - 1;
+          this.state = this.player.takeDamage();
           el.character.classList.add("damaged");
         } else {
           el.character.classList.remove("damaged");
