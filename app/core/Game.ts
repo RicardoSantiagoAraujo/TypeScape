@@ -120,6 +120,8 @@ export class Game {
         this.steps = 0;
         el.character.classList.remove("dead");
         el.character.classList.remove("damaged");
+        // Remove objects from arena
+        this.emptyArena();
       }, 1000);
     }
   }
@@ -131,6 +133,14 @@ export class Game {
       this.steps_max = newStep;
       el.counters.steps_max.innerHTML = String(this.steps_max);
     }
+  }
+
+  emptyArena() {
+    for (const [key, val] of Object.entries(this.objectDict)) {
+      delete this.objectDict[key];
+      document.querySelector(`.${(val as Enemy).obstacle_unique_id}`)?.remove();
+    }
+    this.objectDict = {};
   }
 
   pauseGame(event: KeyboardEvent) {
@@ -150,7 +160,7 @@ export class Game {
   }
 
   obstactGenerator() {
-    let obstact_interval = 5000;
+    let obstact_interval = 1000;
     const intervalId = setInterval(() => {
       for (let i = 0; i < 3; i++) {
         this.objectCounter++;
@@ -172,7 +182,7 @@ export class Game {
           25,
           2000
         );
-        this.objectDict[`enemy_${this.objectCounter}`] = enemy;
+        this.objectDict[enemy.obstacle_unique_id] = enemy;
       }
     }, obstact_interval);
   }

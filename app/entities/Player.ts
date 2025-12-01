@@ -79,6 +79,9 @@ export class Player extends Hitbox {
 
   // Setter for hitpoints, updates the DOM with 'O' characters
   set hitpoints(newHitpoints: number) {
+    if (newHitpoints < 0) {
+      newHitpoints = 0;
+    }
     // console.log("Player health:", newHitpoints);
     this._hitpoints = newHitpoints;
     el.playerState.health.innerHTML =
