@@ -16,12 +16,20 @@ export class Game {
   player: Player;
   settings: Settings;
   _state: GameState;
+  _score: number;
+  score_max: number;
+  _steps: number;
+  steps_max: number;
 
   constructor(settings: Settings) {
     console.log("Init game...");
     this._state = "paused";
     this.settings = settings;
     this.arena = new Arena(settings.arenaWidth, settings.arenaWidth);
+    this._score = 0;
+    this.score_max = 0;
+    this._steps = 0;
+    this.steps_max = 0;
     this.player = new Player(
       settings.defaultCharacterName,
       settings.defaultCharacterId,
@@ -113,6 +121,13 @@ export class Game {
     }
   }
 
+  set steps(newStep: number) {
+    this._steps += newStep;
+    this.steps_max += newStep;
+    el.counters.steps.innerHTML = String(this._steps);
+    el.counters.steps_max.innerHTML = String(this.steps_max);
+  }
+
   pauseGame(event: KeyboardEvent) {
     //// STILL NEED TO IMPLEMENT ACTUAL LOGIC
     if (event.key === "Escape") {
@@ -166,7 +181,7 @@ export class Game {
         if (this._state == "paused") {
           return 0;
         }
-        this.player.moveCharacter(event);
+        this.steps = this.player.moveCharacter(event);
         this.player.performAction(event);
         for (let enemy of enemyList) {
           if (this.player.isCollidingWith(enemy)) {

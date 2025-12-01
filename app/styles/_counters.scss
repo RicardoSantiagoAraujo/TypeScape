@@ -1,0 +1,24 @@
+#counters {
+    display: block;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    width: 50px;
+    height: 100px;
+    transform: translate(-50%, 0%);
+    background-color: rgba(86, 172, 0, 0.811);
+
+    z-index: 100;
+    animation: reveal 0.3s ease-in-out;
+
+    @keyframes reveal {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+    }
+}

@@ -27,4 +27,18 @@ export const elements = {
   actionCooldownTimer: document.querySelector(
     "#actionCooldownTimer .timer"
   ) as HTMLElement,
+  counters: {
+    steps: document.querySelector(
+      "#counters .counters__steps"
+    ) as HTMLDivElement,
+    steps_max: document.querySelector(
+      "#counters .counters__steps_max"
+    ) as HTMLDivElement,
+    score: document.querySelector(
+      "#counters .counters__score"
+    ) as HTMLDivElement,
+    score_max: document.querySelector(
+      "#counters .counters__score_max"
+    ) as HTMLDivElement,
+  },
 };

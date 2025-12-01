@@ -28,31 +28,43 @@ export class Player extends Hitbox {
   }
 
   moveCharacter(event: KeyboardEvent) {
+    let isMoved: boolean = false,
+      x_new: number = this.x,
+      x_old: number = this.x,
+      y_new: number = this.y,
+      y_old: number = this.y;
+
     if (event.key === "ArrowDown" || event.key === "s") {
-      this.y += this.speed;
+      y_new += this.speed;
       this.direction = "Down";
     } else if (event.key === "ArrowRight" || event.key === "d") {
-      this.x += this.speed;
+      x_new += this.speed;
       this.direction = "Right";
     } else if (event.key === "ArrowLeft" || event.key === "q") {
-      this.x -= this.speed;
+      x_new -= this.speed;
       this.direction = "Left";
     } else if (event.key === "ArrowUp" || event.key === "z") {
-      this.y -= this.speed;
+      y_new -= this.speed;
       this.direction = "Up";
     } else {
-      return;
+      return 0;
     }
     // Prevent movement out of bounds
-    this.x = Math.max(
+    x_new = Math.max(
       0,
-      Math.min(settings.arenaWidth - settings.characterWidth, this.x)
+      Math.min(settings.arenaWidth - settings.characterWidth, x_new)
     );
-    this.y = Math.max(
+    y_new = Math.max(
       0,
-      Math.min(settings.arenaHeight - settings.characterHeight, this.y)
+      Math.min(settings.arenaHeight - settings.characterHeight, y_new)
     );
+    this.x = x_new;
+    this.y = y_new;
+    if (x_new != x_old || y_new != y_old) {
+      isMoved = true;
+    }
     this.render();
+    return isMoved ? 1 : 0;
   }
 
   performAction(event: KeyboardEvent) {
