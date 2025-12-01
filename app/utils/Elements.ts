@@ -29,16 +29,16 @@ export const elements = {
   ) as HTMLElement,
   counters: {
     steps: document.querySelector(
-      "#counters .counters__steps"
+      "#counters .counters__steps span"
     ) as HTMLDivElement,
     steps_max: document.querySelector(
-      "#counters .counters__steps_max"
+      "#counters .counters__steps_max span"
     ) as HTMLDivElement,
     score: document.querySelector(
-      "#counters .counters__score"
+      "#counters .counters__score span"
     ) as HTMLDivElement,
     score_max: document.querySelector(
-      "#counters .counters__score_max"
+      "#counters .counters__score_max span"
     ) as HTMLDivElement,
   },
 };

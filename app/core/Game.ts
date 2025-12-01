@@ -115,6 +115,7 @@ export class Game {
         el.gameOverMenu.style.display = "none";
         this.state = "ongoing";
         this.player.hitpoints = this.player.hitpointsStarting;
+        this.steps = 0;
         el.character.classList.remove("dead");
         el.character.classList.remove("damaged");
       }, 1000);
@@ -122,10 +123,12 @@ export class Game {
   }
 
   set steps(newStep: number) {
-    this._steps += newStep;
-    this.steps_max += newStep;
+    this._steps = newStep;
     el.counters.steps.innerHTML = String(this._steps);
-    el.counters.steps_max.innerHTML = String(this.steps_max);
+    if (this._steps > this.steps_max) {
+      this.steps_max = newStep;
+      el.counters.steps_max.innerHTML = String(this.steps_max);
+    }
   }
 
   pauseGame(event: KeyboardEvent) {
@@ -181,7 +184,7 @@ export class Game {
         if (this._state == "paused") {
           return 0;
         }
-        this.steps = this.player.moveCharacter(event);
+        this.steps = this._steps + this.player.moveCharacter(event);
         this.player.performAction(event);
         for (let enemy of enemyList) {
           if (this.player.isCollidingWith(enemy)) {
