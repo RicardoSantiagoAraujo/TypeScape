@@ -74,6 +74,7 @@ export class Player extends Hitbox {
     if (event.key === " ") {
       // console.log("Performing action");
       this.action.triggerAction(event);
+      return true;
     }
   }
 

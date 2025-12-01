@@ -187,6 +187,21 @@ export class Game {
     }, obstact_interval);
   }
 
+  detectCollisions() {
+    for (let enemy of Object.values(this.objectDict)) {
+      if (
+        this.player.isCollidingWith(enemy as Enemy) &&
+        (enemy as Enemy).stateEnemy == "active"
+      ) {
+        // console.log("Collision detected!");
+        this.state = this.player.takeDamage();
+        el.character.classList.add("damaged");
+      } else {
+        el.character.classList.remove("damaged");
+      }
+    }
+  }
+
   startRound(event: KeyboardEvent | MouseEvent) {
     if (
       event instanceof KeyboardEvent &&
@@ -215,19 +230,10 @@ export class Game {
           return 0;
         }
         this.steps = this._steps + this.player.moveCharacter(event);
-        this.player.performAction(event);
-        for (let enemy of Object.values(this.objectDict)) {
-          if (
-            this.player.isCollidingWith(enemy as Enemy) &&
-            (enemy as Enemy).stateEnemy == "active"
-          ) {
-            // console.log("Collision detected!");
-            this.state = this.player.takeDamage();
-            el.character.classList.add("damaged");
-          } else {
-            el.character.classList.remove("damaged");
-          }
+        if (this.player.performAction(event)) {
+          this.emptyArena();
         }
+        this.detectCollisions();
       });
     }
   }
