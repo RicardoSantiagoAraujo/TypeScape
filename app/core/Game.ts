@@ -158,6 +158,9 @@ export class Game {
     if (el.inputName.value != "") {
       el.formStart.style.display = "none";
       el.arena.style.display = "block";
+      el.counters._all.style.display = "block";
+      el.playerState._all.style.display = "flex";
+      el.actionCooldownTimer._all.style.display = "flex";
       this.state = "ongoing";
       el.audioElement.play();
       console.log("Starting Round");

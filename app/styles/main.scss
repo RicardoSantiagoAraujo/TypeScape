@@ -6,7 +6,8 @@
 @use './pause';
 @use './counters';
 @use './gameOver';
-
+@use './playerState';
+@use './cooldown';
 html {
   height: 100%;
   margin: 0;
@@ -27,6 +28,7 @@ body {
 
 #instructions {
   position: absolute;
+  z-index: 10;
   bottom: 20px;
   right: 20px;
   background: rgba(255, 255, 255, 0.8);

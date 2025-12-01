@@ -5,7 +5,7 @@ import { Hitbox } from "./Hitbox.js";
 import { GameState } from "../core/Game.js";
 export class Player extends Hitbox {
   public action: Action;
-  public hitpoints: number;
+  public _hitpoints: number = 0;
 
   constructor(
     public name: string,
@@ -19,6 +19,9 @@ export class Player extends Hitbox {
     public direction: "Up" | "Down" | "Left" | "Right"
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
+    this.name = name;
+    el.playerState.icon.src = `assets/img/characters/${this.id}/${this.id}Down.png`;
+    el.playerState.name.innerHTML = name;
     this.hitpointsStarting = hitpointsStarting;
     this.hitpoints = hitpointsStarting;
     this.action = new Action(
@@ -74,10 +77,19 @@ export class Player extends Hitbox {
     }
   }
 
+  // Setter for hitpoints, updates the DOM with 'O' characters
+  set hitpoints(newHitpoints: number) {
+    console.log("Player health:", newHitpoints);
+    this._hitpoints = newHitpoints;
+    el.playerState.health.innerHTML =
+      "<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' />".repeat(
+        newHitpoints
+      ); // Update player state in DOM
+  }
+
   public takeDamage(): GameState {
-    console.log("Player health: ", this.hitpoints);
-    this.hitpoints = this.hitpoints - 1;
-    if (this.hitpoints <= 0) {
+    this.hitpoints = this._hitpoints - 1;
+    if (this._hitpoints <= 0) {
       el.character.classList.add("dead");
       el.imgCharacter.src =
         "https://p7.hiclipart.com/preview/415/127/691/8-bit-color-skull-pixel-art-skull.jpg";

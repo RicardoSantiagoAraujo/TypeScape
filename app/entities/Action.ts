@@ -112,20 +112,20 @@ export class Action {
    */
   restartCountdown() {
     var countdownTime = settings.actionCooldown;
-    el.actionCooldownTimer.classList.remove("ready");
-    el.actionCooldownTimer.innerHTML = this.timeFormat(countdownTime);
+    el.actionCooldownTimer.timer.classList.remove("ready");
+    el.actionCooldownTimer.timer.innerHTML = this.timeFormat(countdownTime);
     var stepSize = 100;
     const interval = setInterval(() => {
       countdownTime = countdownTime - stepSize; // Decrease the time by 1 second
 
       // Display the remaining time
-      el.actionCooldownTimer.innerHTML = this.timeFormat(countdownTime);
+      el.actionCooldownTimer.timer.innerHTML = this.timeFormat(countdownTime);
 
       // If the countdown reaches 0, stop the timer and display "EXPIRED"
       if (countdownTime <= 0) {
         clearInterval(interval);
-        el.actionCooldownTimer.innerHTML = "READY";
-        el.actionCooldownTimer.classList.add("ready");
+        el.actionCooldownTimer.timer.innerHTML = "READY";
+        el.actionCooldownTimer.timer.classList.add("ready");
       }
     }, stepSize); // Update the countdown every second
   }

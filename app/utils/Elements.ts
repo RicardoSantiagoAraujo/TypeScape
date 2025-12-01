@@ -24,10 +24,12 @@ export const elements = {
       document.querySelectorAll(`.ActionRandom`) as NodeListOf<HTMLElement>
     );
   },
-  actionCooldownTimer: document.querySelector(
-    "#actionCooldownTimer .timer"
-  ) as HTMLElement,
+  actionCooldownTimer: {
+    _all: document.querySelector("#actionCooldownTimer") as HTMLElement,
+    timer: document.querySelector("#actionCooldownTimer .timer") as HTMLElement,
+  },
   counters: {
+    _all: document.querySelector("#counters") as HTMLDivElement,
     steps: document.querySelector(
       "#counters .counters__steps span"
     ) as HTMLDivElement,
@@ -40,5 +42,11 @@ export const elements = {
     score_max: document.querySelector(
       "#counters .counters__score_max span"
     ) as HTMLDivElement,
+  },
+  playerState: {
+    _all: document.querySelector("#playerState") as HTMLDivElement,
+    icon: document.querySelector("#playerState .icon") as HTMLImageElement,
+    name: document.querySelector("#playerState .name") as HTMLDivElement,
+    health: document.querySelector("#playerState .health") as HTMLDivElement,
   },
 };

@@ -1,12 +1,12 @@
 #counters {
-    display: block;
+    display: none;
     position: absolute;
     top: 0%;
     left: 50%;
     width: 500px;
     height: 50px;
     transform: translate(-50%, 0%);
-    background-color: rgba(152, 255, 50, 0.911);
+    background-color: rgba(189, 246, 132, 0.911);
     border-radius: 0 0 30px 30px;
 
     z-index: 100;
