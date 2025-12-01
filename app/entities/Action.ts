@@ -25,7 +25,7 @@ export class Action {
       document.querySelector(
         "#actionArenaEffect"
       )!.innerHTML += `<img class="ActionRandom" src=${actionImg}>`;
-      console.log(actionImg);
+      // console.log(actionImg);
     }
   }
 

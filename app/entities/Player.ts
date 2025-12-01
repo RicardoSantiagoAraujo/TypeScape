@@ -72,14 +72,14 @@ export class Player extends Hitbox {
 
   performAction(event: KeyboardEvent) {
     if (event.key === " ") {
-      console.log("Performing action");
+      // console.log("Performing action");
       this.action.triggerAction(event);
     }
   }
 
   // Setter for hitpoints, updates the DOM with 'O' characters
   set hitpoints(newHitpoints: number) {
-    console.log("Player health:", newHitpoints);
+    // console.log("Player health:", newHitpoints);
     this._hitpoints = newHitpoints;
     el.playerState.health.innerHTML =
       "<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' />".repeat(

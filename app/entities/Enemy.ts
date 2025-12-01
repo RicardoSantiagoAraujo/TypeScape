@@ -4,6 +4,7 @@ import { elements as el } from "../utils/Elements.js";
 export class Enemy extends Hitbox {
   damage: number;
   spawnDelay: number;
+  stateEnemy: "inactive" | "active" = "inactive";
 
   constructor(
     x: number,
@@ -36,6 +37,7 @@ export class Enemy extends Hitbox {
     // Add style for fully spawned
     setTimeout(() => {
       div.classList.remove("spawning");
+      this.stateEnemy = "active";
     }, this.spawnDelay);
   }
 

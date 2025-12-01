@@ -20,6 +20,8 @@ export class Game {
   score_max: number;
   _steps: number;
   steps_max: number;
+  objectDict: Record<string, Object> = {};
+  objectCounter: number = 0;
 
   constructor(settings: Settings) {
     console.log("Init game...");
@@ -147,6 +149,34 @@ export class Game {
     }
   }
 
+  obstactGenerator() {
+    let obstact_interval = 5000;
+    const intervalId = setInterval(() => {
+      for (let i = 0; i < 3; i++) {
+        this.objectCounter++;
+        let obstact_width = getRandomNumberBetween(30, 150);
+        let obstact_height = getRandomNumberBetween(30, 150);
+        let obstact_x_position = getRandomNumberBetween(
+          0,
+          this.settings.arenaWidth - obstact_width
+        );
+        let obstact_y_position = getRandomNumberBetween(
+          0,
+          this.settings.arenaHeight - obstact_height
+        );
+        const enemy = new Enemy(
+          obstact_x_position,
+          obstact_y_position,
+          obstact_width,
+          obstact_height,
+          25,
+          2000
+        );
+        this.objectDict[`enemy_${this.objectCounter}`] = enemy;
+      }
+    }, obstact_interval);
+  }
+
   startRound(event: KeyboardEvent | MouseEvent) {
     if (
       event instanceof KeyboardEvent &&
@@ -164,21 +194,8 @@ export class Game {
       this.state = "ongoing";
       el.audioElement.play();
       console.log("Starting Round");
-      // console.log(this.player)
       this.player.render();
-      var enemyList: Enemy[] = [];
-      for (let i = 0; i < 5; i++) {
-        const enemy = new Enemy(
-          getRandomNumberBetween(0, this.settings.arenaWidth),
-          getRandomNumberBetween(0, this.settings.arenaHeight),
-          getRandomNumberBetween(30, 150),
-          getRandomNumberBetween(30, 150),
-          25,
-          2000
-        );
-        enemyList.push(enemy);
-      }
-
+      this.obstactGenerator();
       document.addEventListener("keydown", (event) => {
         if (this._state == "game_over") {
           return 0;
@@ -189,9 +206,12 @@ export class Game {
         }
         this.steps = this._steps + this.player.moveCharacter(event);
         this.player.performAction(event);
-        for (let enemy of enemyList) {
-          if (this.player.isCollidingWith(enemy)) {
-            console.log("Collision detected!");
+        for (let enemy of Object.values(this.objectDict)) {
+          if (
+            this.player.isCollidingWith(enemy as Enemy) &&
+            (enemy as Enemy).stateEnemy == "active"
+          ) {
+            // console.log("Collision detected!");
             this.state = this.player.takeDamage();
             el.character.classList.add("damaged");
           } else {
