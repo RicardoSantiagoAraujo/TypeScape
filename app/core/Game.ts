@@ -270,7 +270,11 @@ export class Game {
         (item as Item).state == "active"
       ) {
         setTimeout(() => {
-          this.score = this._score + 1;
+          if ((item as Item).item_type == "point") {
+            this.score = this._score + 1;
+          } else if ((item as Item).item_type == "health") {
+            this.player.hitpoints = this.player._hitpoints + 1;
+          }
           delete this.objectDict.items[item.unique_id];
           document.querySelector(`.${item.unique_id}`)?.remove();
           isOngoingItemCollision = true;
