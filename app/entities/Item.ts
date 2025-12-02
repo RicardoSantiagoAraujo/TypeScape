@@ -39,6 +39,6 @@ export class Item extends NonPlayerObject {
         break;
       }
     }
-    super.updateDivImage(); // Update the div image after setting the new image_url
+    super.addElement();
   }
 }

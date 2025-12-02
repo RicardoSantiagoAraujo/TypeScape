@@ -21,7 +21,9 @@ export class NonPlayerObject extends Hitbox {
     this.unique_id = `nonPlayerObject_${NonPlayerObject.counter}`;
     this.classNames = classNames;
     this.spawnDelay = spawnDelay;
+  }
 
+  public addElement() {
     const div = document.createElement("div");
     // Set the text content of the div
     div.textContent = "";
@@ -30,7 +32,7 @@ export class NonPlayerObject extends Hitbox {
     div.classList.add(
       "nonPlayerObject",
       this.unique_id,
-      ...classNames,
+      ...this.classNames,
       "spawning"
     );
 
@@ -52,7 +54,7 @@ export class NonPlayerObject extends Hitbox {
   }
 
   // Update the image of the div element when `image_url` changes
-  public updateDivImage() {
+  public updateElement() {
     const div = document.querySelector(`.${this.unique_id}`) as HTMLElement;
     if (div) {
       div.style.backgroundImage = `url(${this.image_url})`;

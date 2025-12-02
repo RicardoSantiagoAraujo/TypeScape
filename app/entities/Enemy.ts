@@ -18,6 +18,6 @@ export class Enemy extends NonPlayerObject {
     super(x, y, width, height, spawnDelay, ["enemy"]); // Call the Hitbox constructor
     Enemy.counterEnemy++;
     this.enemy_unique_id = `enemy_${Enemy.counterEnemy}`;
-    super.updateDivImage(); // Update the div image after setting the new image_url
+    super.addElement(); //
   }
 }

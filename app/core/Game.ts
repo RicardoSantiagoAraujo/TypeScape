@@ -141,9 +141,9 @@ export class Game {
   }
 
   emptyArena() {
-    console.log("Empty the arena !");
+    // console.log("Empty the arena !");
     for (const [key, val] of Object.entries(this.objectDict.enemies)) {
-      console.log(`.${(val as NonPlayerObject).unique_id}`);
+      // console.log(`.${(val as NonPlayerObject).unique_id}`);
       delete this.objectDict.enemies[key];
       document
         .querySelector(`.${(val as NonPlayerObject).unique_id}`)
@@ -256,9 +256,11 @@ export class Game {
         this.player.isCollidingWith(item as Item) &&
         (item as Item).state == "active"
       ) {
-        this._score += 1;
-        document.querySelector(`.${item.unique_id}`)?.remove();
-        isOngoingItemCollision = true;
+        setTimeout(() => {
+          this._score += 1;
+          document.querySelector(`.${item.unique_id}`)?.remove();
+          isOngoingItemCollision = true;
+        }, 200);
       } else {
       }
     }
