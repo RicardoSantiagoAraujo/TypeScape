@@ -127,7 +127,7 @@ export class Game {
         el.character.classList.remove("dead");
         el.character.classList.remove("damaged");
         // Remove objects from arena
-        this.emptyArena();
+        this.emptyArena(["enemies", "items"]);
       }, 1000);
     }
   }
@@ -151,14 +151,16 @@ export class Game {
     }
   }
 
-  emptyArena() {
+  emptyArena(item_types: ("enemies" | "items")[]) {
     // console.log("Empty the arena !");
-    for (const [key, val] of Object.entries(this.objectDict.enemies)) {
-      // console.log(`.${(val as NonPlayerObject).unique_id}`);
-      delete this.objectDict.enemies[key];
-      document
-        .querySelector(`.${(val as NonPlayerObject).unique_id}`)
-        ?.remove();
+    for (let item_type of item_types) {
+      for (const [key, val] of Object.entries(this.objectDict[item_type])) {
+        // console.log(`.${(val as NonPlayerObject).unique_id}`);
+        delete this.objectDict[item_type][key];
+        document
+          .querySelector(`.${(val as NonPlayerObject).unique_id}`)
+          ?.remove();
+      }
     }
   }
 
@@ -313,7 +315,7 @@ export class Game {
         }
         this.steps = this._steps + this.player.moveCharacter(event);
         if (this.player.performAction(event)) {
-          this.emptyArena();
+          this.emptyArena(["enemies"]);
         }
         this.detectCollisions();
       });
