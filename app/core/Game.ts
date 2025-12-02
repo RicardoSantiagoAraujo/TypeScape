@@ -123,6 +123,7 @@ export class Game {
         this.state = "ongoing";
         this.player.hitpoints = this.player.hitpointsStarting;
         this.steps = 0;
+        this.score = 0;
         el.character.classList.remove("dead");
         el.character.classList.remove("damaged");
         // Remove objects from arena
@@ -137,6 +138,16 @@ export class Game {
     if (this._steps > this.steps_max) {
       this.steps_max = newStep;
       el.counters.steps_max.innerHTML = String(this.steps_max);
+    }
+  }
+
+  set score(newScore: number) {
+    this._score = newScore;
+    console.log(newScore);
+    el.counters.score.innerHTML = String(newScore);
+    if (this._score > this.score_max) {
+      this.score_max = newScore;
+      el.counters.score_max.innerHTML = String(this.score_max);
     }
   }
 
@@ -257,7 +268,8 @@ export class Game {
         (item as Item).state == "active"
       ) {
         setTimeout(() => {
-          this._score += 1;
+          this.score = this._score + 1;
+          delete this.objectDict.items[item.unique_id];
           document.querySelector(`.${item.unique_id}`)?.remove();
           isOngoingItemCollision = true;
         }, 200);
