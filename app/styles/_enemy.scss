@@ -1,6 +1,6 @@
 @use './variables' as var;
 
-.enemy {
+.nonPlayerObject {
     position: absolute;
     background: url("../assets/img/textures/blackhole.png");
     background-size: 30px;

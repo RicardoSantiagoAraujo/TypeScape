@@ -1,6 +1,7 @@
 import { Arena } from "../entities/Arena.js";
 import { Player } from "../entities/Player.js";
 import { Enemy } from "../entities/Enemy.js";
+import { NonPlayerObject } from "../entities/nonPlayerObject.js";
 import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
 import { getRandomNumberBetween } from "../utils/helper.js";
@@ -136,11 +137,14 @@ export class Game {
   }
 
   emptyArena() {
+    console.log("Empty the arena !");
     for (const [key, val] of Object.entries(this.objectDict)) {
+      console.log(`.${(val as NonPlayerObject).unique_id}`);
       delete this.objectDict[key];
-      document.querySelector(`.${(val as Enemy).obstacle_unique_id}`)?.remove();
+      document
+        .querySelector(`.${(val as NonPlayerObject).unique_id}`)
+        ?.remove();
     }
-    this.objectDict = {};
   }
 
   pauseGame(event: KeyboardEvent) {
@@ -179,10 +183,9 @@ export class Game {
           obstact_y_position,
           obstact_width,
           obstact_height,
-          25,
-          2000
+          1000
         );
-        this.objectDict[enemy.obstacle_unique_id] = enemy;
+        this.objectDict[enemy.unique_id] = enemy;
       }
     }, obstact_interval);
   }
@@ -192,7 +195,7 @@ export class Game {
     for (let enemy of Object.values(this.objectDict)) {
       if (
         this.player.isCollidingWith(enemy as Enemy) &&
-        (enemy as Enemy).stateEnemy == "active"
+        (enemy as Enemy).state == "active"
       ) {
         // console.log("Collision detected!");
         this.state = this.player.takeDamage();
