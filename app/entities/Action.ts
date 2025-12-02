@@ -100,6 +100,7 @@ export class Action {
       setTimeout(() => {
         this.actionAvailable = true;
       }, this.cooldownMilliseconds);
+      return true
     }
   }
 

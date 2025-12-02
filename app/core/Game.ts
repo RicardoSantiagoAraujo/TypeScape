@@ -188,6 +188,7 @@ export class Game {
   }
 
   detectCollisions() {
+    let isOngoingCollision: boolean = false;
     for (let enemy of Object.values(this.objectDict)) {
       if (
         this.player.isCollidingWith(enemy as Enemy) &&
@@ -195,10 +196,15 @@ export class Game {
       ) {
         // console.log("Collision detected!");
         this.state = this.player.takeDamage();
-        el.character.classList.add("damaged");
+        isOngoingCollision = true;
+        break; // break out once damage is detected,to avoid taking multiple damage from overlapping obstacts
       } else {
-        el.character.classList.remove("damaged");
       }
+    }
+    if (isOngoingCollision) {
+      el.character.classList.add("damaged");
+    } else {
+      el.character.classList.remove("damaged");
     }
   }
 
@@ -235,6 +241,10 @@ export class Game {
         }
         this.detectCollisions();
       });
+      // Run collision detection on an interval
+      const collissionInterval = setInterval(() => {
+        this.detectCollisions();
+      }, 1000);
     }
   }
 }

@@ -1,9 +1,10 @@
 import { Hitbox } from "./Hitbox.js";
 import { elements as el } from "../utils/Elements.js";
 
-export class Enemy extends Hitbox {
+export class Item extends Hitbox {
+  private damage: number;
   private spawnDelay: number;
-  public stateEnemy: "inactive" | "active" = "inactive";
+  public stateItem: "inactive" | "active" = "inactive";
   obstacle_unique_id: string;
   private static counter: number = 0;
   constructor(
@@ -11,11 +12,13 @@ export class Enemy extends Hitbox {
     y: number,
     width: number,
     height: number,
+    damage: number,
     spawnDelay: number
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
-    Enemy.counter++;
-    this.obstacle_unique_id = `obstact_${Enemy.counter}`;
+    Item.counter++;
+    this.obstacle_unique_id = `obstact_${Item.counter}`;
+    this.damage = damage;
     this.spawnDelay = spawnDelay;
 
     const div = document.createElement("div");
@@ -24,7 +27,7 @@ export class Enemy extends Hitbox {
     div.textContent = "";
 
     // Add a class to the div for styling purposes
-    div.classList.add("enemy", "spawning");
+    div.classList.add("item", "spawning");
 
     // Set styles directly on the div
     div.style.left = `${this.x}px`;
@@ -38,7 +41,7 @@ export class Enemy extends Hitbox {
     // Add style for fully spawned
     setTimeout(() => {
       div.classList.remove("spawning");
-      this.stateEnemy = "active";
+      this.stateItem = "active";
     }, this.spawnDelay);
   }
 }

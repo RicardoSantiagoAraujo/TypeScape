@@ -73,8 +73,7 @@ export class Player extends Hitbox {
   performAction(event: KeyboardEvent) {
     if (event.key === " ") {
       // console.log("Performing action");
-      this.action.triggerAction(event);
-      return true;
+      return this.action.triggerAction(event);
     }
   }
 
@@ -85,10 +84,16 @@ export class Player extends Hitbox {
     }
     // console.log("Player health:", newHitpoints);
     this._hitpoints = newHitpoints;
-    el.playerState.health.innerHTML =
-      "<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' />".repeat(
-        newHitpoints
-      ); // Update player state in DOM
+    if (newHitpoints <= 3) {
+      // If up two n points, show each one
+      el.playerState.health.innerHTML =
+        "<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' />".repeat(
+          newHitpoints
+        );
+    } else {
+      // Display with a number otherwise
+      el.playerState.health.innerHTML = `<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' /> × ${newHitpoints}`;
+    }
   }
 
   public takeDamage(): GameState {
