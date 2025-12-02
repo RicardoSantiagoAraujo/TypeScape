@@ -2,6 +2,7 @@ import { Arena } from "../entities/Arena.js";
 import { Player } from "../entities/Player.js";
 import { Enemy } from "../entities/Enemy.js";
 import { NonPlayerObject } from "../entities/nonPlayerObject.js";
+import { Item, itemType } from "../entities/Item.js";
 import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
 import { getRandomNumberBetween } from "../utils/helper.js";
@@ -21,7 +22,10 @@ export class Game {
   score_max: number;
   _steps: number;
   steps_max: number;
-  objectDict: Record<string, Object> = {};
+  objectDict: Record<"enemies" | "items", Record<string, NonPlayerObject>> = {
+    enemies: {},
+    items: {},
+  };
   objectCounter: number = 0;
 
   constructor(settings: Settings) {
@@ -138,9 +142,9 @@ export class Game {
 
   emptyArena() {
     console.log("Empty the arena !");
-    for (const [key, val] of Object.entries(this.objectDict)) {
+    for (const [key, val] of Object.entries(this.objectDict.enemies)) {
       console.log(`.${(val as NonPlayerObject).unique_id}`);
-      delete this.objectDict[key];
+      delete this.objectDict.enemies[key];
       document
         .querySelector(`.${(val as NonPlayerObject).unique_id}`)
         ?.remove();
@@ -163,51 +167,105 @@ export class Game {
     }
   }
 
-  obstactGenerator() {
-    let obstact_interval = 1000;
+  enemyGenerator() {
+    let enemy_interval = 1000;
     const intervalId = setInterval(() => {
       for (let i = 0; i < 3; i++) {
         this.objectCounter++;
-        let obstact_width = getRandomNumberBetween(30, 150);
-        let obstact_height = getRandomNumberBetween(30, 150);
-        let obstact_x_position = getRandomNumberBetween(
+        let enemy_width = getRandomNumberBetween(30, 150);
+        let enemy_height = getRandomNumberBetween(30, 150);
+        let enemy_x_position = getRandomNumberBetween(
           0,
-          this.settings.arenaWidth - obstact_width
+          this.settings.arenaWidth - enemy_width
         );
-        let obstact_y_position = getRandomNumberBetween(
+        let enemy_y_position = getRandomNumberBetween(
           0,
-          this.settings.arenaHeight - obstact_height
+          this.settings.arenaHeight - enemy_height
         );
         const enemy = new Enemy(
-          obstact_x_position,
-          obstact_y_position,
-          obstact_width,
-          obstact_height,
+          enemy_x_position,
+          enemy_y_position,
+          enemy_width,
+          enemy_height,
           1000
         );
-        this.objectDict[enemy.unique_id] = enemy;
+        this.objectDict.enemies[enemy.unique_id] = enemy;
       }
-    }, obstact_interval);
+    }, enemy_interval);
+  }
+
+  itemGenerator() {
+    let interval = 5000;
+    const intervalId = setInterval(() => {
+      const probabilities: itemType[] = [
+        ...Array(2).fill("health"),
+        ...Array(8).fill("point"),
+      ];
+
+      const item_type: itemType =
+        probabilities[Math.floor(Math.random() * probabilities.length)];
+      for (let i = 0; i < 1; i++) {
+        this.objectCounter++;
+        let width = 30;
+        let height = 30;
+        let x_position = getRandomNumberBetween(
+          0,
+          this.settings.arenaWidth - width
+        );
+        let y_position = getRandomNumberBetween(
+          0,
+          this.settings.arenaHeight - height
+        );
+        const obj = new Item(
+          x_position,
+          y_position,
+          width,
+          height,
+          1000,
+          item_type
+        );
+        this.objectDict.items[obj.unique_id] = obj;
+      }
+    }, interval);
   }
 
   detectCollisions() {
-    let isOngoingCollision: boolean = false;
-    for (let enemy of Object.values(this.objectDict)) {
+    // --- With Enemies
+    let isOngoingEnemyCollision: boolean = false;
+    for (let enemy of Object.values(this.objectDict.enemies)) {
       if (
         this.player.isCollidingWith(enemy as Enemy) &&
         (enemy as Enemy).state == "active"
       ) {
         // console.log("Collision detected!");
         this.state = this.player.takeDamage();
-        isOngoingCollision = true;
-        break; // break out once damage is detected,to avoid taking multiple damage from overlapping obstacts
+        isOngoingEnemyCollision = true;
+        break; // break out once damage is detected,to avoid taking multiple damage from overlapping enemys
       } else {
       }
     }
-    if (isOngoingCollision) {
+    if (isOngoingEnemyCollision) {
       el.character.classList.add("damaged");
     } else {
       el.character.classList.remove("damaged");
+    }
+    // --- With Items
+    let isOngoingItemCollision: boolean = false;
+    for (let item of Object.values(this.objectDict.items)) {
+      if (
+        this.player.isCollidingWith(item as Item) &&
+        (item as Item).state == "active"
+      ) {
+        this._score += 1;
+        document.querySelector(`.${item.unique_id}`)?.remove();
+        isOngoingItemCollision = true;
+      } else {
+      }
+    }
+    if (isOngoingItemCollision) {
+      el.character.classList.add("pickup");
+    } else {
+      el.character.classList.remove("pickup");
     }
   }
 
@@ -229,7 +287,8 @@ export class Game {
       el.audioElement.play();
       console.log("Starting Round");
       this.player.render();
-      this.obstactGenerator();
+      this.enemyGenerator();
+      this.itemGenerator();
       document.addEventListener("keydown", (event) => {
         if (this._state == "game_over") {
           return 0;

@@ -1,7 +1,8 @@
 @use './variables' as var;
 @use './arena';
 @use './character';
-@use './enemy';
+@use './nonPlayerObject/enemy';
+@use './nonPlayerObject/item';
 @use './form';
 @use './pause';
 @use './counters';

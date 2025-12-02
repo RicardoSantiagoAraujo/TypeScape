@@ -6,6 +6,8 @@ export class Enemy extends NonPlayerObject {
   public stateEnemy: "inactive" | "active" = "inactive";
   enemy_unique_id: string;
   private static counterEnemy: number = 0;
+  public image_url: string = "../assets/img/textures/blackhole.png";
+
   constructor(
     x: number,
     y: number,
@@ -16,5 +18,6 @@ export class Enemy extends NonPlayerObject {
     super(x, y, width, height, spawnDelay, ["enemy"]); // Call the Hitbox constructor
     Enemy.counterEnemy++;
     this.enemy_unique_id = `enemy_${Enemy.counterEnemy}`;
+    super.updateDivImage(); // Update the div image after setting the new image_url
   }
 }

@@ -1,17 +1,17 @@
-@use './variables' as var;
+@use '../variables' as var;
 
-.nonPlayerObject {
+.nonPlayerObject.item {
     position: absolute;
-    background: url("../assets/img/textures/blackhole.png");
     background-size: 30px;
     background-position: center;
     background-repeat: repeat;
-    border: 2px solid #ff0000ff;
+    border: 2px solid rgb(0, 255, 34);
     border-radius: 8px;
     font-size: 16p;
     text-align: center;
     transition: 0.3s;
-    &.spawning{
+
+    &.spawning {
         filter: brightness(10)blur(5px)drop-shadow(0 0 10px white);
     }
 }
