@@ -23,6 +23,8 @@ export class Game {
   score_max: number;
   _steps: number;
   steps_max: number;
+  _survival_time: number;
+  survival_time_max: number;
   objectDict: Record<"enemies" | "items", Record<string, NonPlayerObject>> = {
     enemies: {},
     items: {},
@@ -41,6 +43,8 @@ export class Game {
     this.score_max = 0;
     this._steps = 0;
     this.steps_max = 0;
+    this._survival_time = 0;
+    this.survival_time_max = 0;
     this.enemyInterval = settings.startingEnemyInterval;
     this.enemiesPerSpawn = settings.startingEnemiesPerSpawn;
     this.activateMuteFunctionality();
@@ -126,6 +130,7 @@ export class Game {
       this.player.hitpoints = this.player.hitpointsStarting;
       this.steps = 0;
       this.score = 0;
+      this._survival_time = 0,
       el.character.classList.remove("dead");
       el.character.classList.remove("damaged");
       this.enemyInterval = this.settings.startingEnemyInterval;
@@ -147,6 +152,15 @@ export class Game {
     if (this._steps > this.steps_max) {
       this.steps_max = newStep;
       el.counters.steps_max.innerHTML = String(this.steps_max);
+    }
+  }
+
+  set suvival_time(newTime: number) {
+    this._survival_time = newTime;
+    el.counters.survival_time.innerHTML = String(this._survival_time);
+    if (this._survival_time > this.survival_time_max) {
+      this.survival_time_max = newTime;
+      el.counters.survival_time_max.innerHTML = String(this.survival_time_max);
     }
   }
 

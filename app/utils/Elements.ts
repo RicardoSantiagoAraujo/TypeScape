@@ -45,6 +45,12 @@ export const elements = {
     score_max: document.querySelector(
       "#counters .counters__score_max span"
     ) as HTMLDivElement,
+    survival_time: document.querySelector(
+      "#counters .counters__suvival_time span"
+    ) as HTMLDivElement,
+    survival_time_max: document.querySelector(
+      "#counters .counters__suvival_time_max span"
+    ) as HTMLDivElement,
   },
   playerState: {
     _all: document.querySelector("#playerState") as HTMLDivElement,
