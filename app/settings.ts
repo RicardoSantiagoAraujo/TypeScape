@@ -13,6 +13,14 @@ export var settings = new Settings({
   characterWidth: 50,
   requireCharacterCreation: true,
   actionCooldown: 3000,
-  actionEffect: ["assets/img/eclair2.png", "assets/img/eclair3.png"],
-  actionEffectNumber: 3,
+  actionEffect: [
+    "assets/img/actions/lightning1.png",
+    "assets/img/actions/lightning2.png",
+    "assets/img/actions/lightning3.png",
+    "assets/img/actions/lightning4.png",
+    "assets/img/actions/lightning5.png",
+    "assets/img/actions/lightning6.png",
+    "assets/img/actions/lightning7.png",
+  ],
+  actionEffectNumber: 10,
 });

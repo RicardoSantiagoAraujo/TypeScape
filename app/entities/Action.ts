@@ -11,11 +11,11 @@ export class Action {
   cooldownMilliseconds: number;
 
   constructor(numberOfEffects: number, cooldownMilliseconds: number) {
+    console.log("Action constructor !");
     this.actionAvailable = true;
     this.numberOfEffects = numberOfEffects;
     this.cooldownMilliseconds = cooldownMilliseconds;
-
-    for (let i = 0; i < settings.actionEffectNumber; i++) {
+    for (let i = 0; i < numberOfEffects; i++) {
       let currentAction;
       // Obtion A. Completely random:
       //   currentAction = Math.floor(Math.random() * settings.actionEffect.length);
@@ -24,7 +24,7 @@ export class Action {
       let actionImg = settings.actionEffect[currentAction];
       document.querySelector(
         "#actionArenaEffect"
-      )!.innerHTML += `<img class="ActionRandom" src=${actionImg}>`;
+      )!.innerHTML += `<div class="ActionRandom"><img class="ActionRandomImg" src=${actionImg}><div/>`;
       // console.log(actionImg);
     }
   }
@@ -63,6 +63,14 @@ export class Action {
   }
 
   applyActionEffects() {
+    let characterEffects: string[] = [
+      "assets/img/actions/bolt1.png",
+      "assets/img/actions/bolt2.png",
+      "assets/img/actions/bolt3.png",
+      "assets/img/actions/bolt4.png",
+    ];
+    el.actionCharacterEffect.src =
+      characterEffects[Math.floor(Math.random() * characterEffects.length)];
     el.actionCharacterEffect.classList.add("actionCharacterEffect--active");
 
     el.sufaceTextures.arena.style.filter =
@@ -100,7 +108,7 @@ export class Action {
       setTimeout(() => {
         this.actionAvailable = true;
       }, this.cooldownMilliseconds);
-      return true
+      return true;
     }
   }
 
@@ -112,7 +120,7 @@ export class Action {
    * Function to reset skill cooldown countdown
    */
   restartCountdown() {
-    var countdownTime = settings.actionCooldown;
+    var countdownTime = this.cooldownMilliseconds;
     el.actionCooldownTimer.timer.classList.remove("ready");
     el.actionCooldownTimer.timer.innerHTML = this.timeFormat(countdownTime);
     var stepSize = 100;

@@ -15,8 +15,9 @@ export type GameState = "ongoing" | "paused" | "game_over";
  */
 export class Game {
   arena: Arena;
-  player: Player;
+  player!: Player;
   settings: Settings;
+  chosen_character_id: string = "";
   _state: GameState;
   _score: number;
   score_max: number;
@@ -37,17 +38,6 @@ export class Game {
     this.score_max = 0;
     this._steps = 0;
     this.steps_max = 0;
-    this.player = new Player(
-      settings.defaultCharacterName,
-      settings.defaultCharacterId,
-      3,
-      settings.characterHeight,
-      settings.characterWidth,
-      settings.startingPositionX,
-      settings.startingPositionY,
-      settings.movementDistancePerClick,
-      "Down"
-    );
     this.activateMuteFunctionality();
     el.inputName.value = settings.defaultCharacterName; // Default name
     this.toggleStartButton();
@@ -58,7 +48,7 @@ export class Game {
       el.btnStart.onclick = (event) => {
         this.player = new Player(
           el.inputName.value,
-          this.player.id,
+          this.chosen_character_id,
           3,
           settings.characterHeight,
           settings.characterWidth,
@@ -70,6 +60,17 @@ export class Game {
         this.startRound(event);
       };
     } else {
+      this.player = new Player(
+        settings.defaultCharacterName,
+        settings.defaultCharacterId,
+        3,
+        settings.characterHeight,
+        settings.characterWidth,
+        settings.startingPositionX,
+        settings.startingPositionY,
+        settings.movementDistancePerClick,
+        "Down"
+      );
       this.startRound(new MouseEvent("click"));
     }
   }
@@ -88,9 +89,10 @@ export class Game {
         <img src=${`assets/img/characters/${charId}/${charId}Down.png`} alt=${charId} />
          `;
       if (charId == settings.defaultCharacterId) {
+        this.chosen_character_id = charId;
       }
       labelEl.onclick = (event: Event) => {
-        this.player.id = charId;
+        this.chosen_character_id = charId;
       };
       el.availableCharacters.appendChild(labelEl);
     });
@@ -143,7 +145,6 @@ export class Game {
 
   set score(newScore: number) {
     this._score = newScore;
-    console.log(newScore);
     el.counters.score.innerHTML = String(newScore);
     if (this._score > this.score_max) {
       this.score_max = newScore;

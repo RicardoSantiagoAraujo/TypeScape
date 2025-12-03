@@ -57,34 +57,45 @@
     z-index: 9999;
 
     .ActionRandom {
-        opacity: 0;
-        transition: opacity 0.5s;
         position: absolute;
-        display: block;
-        z-index: 100000;
+        width: 100px;
+        height: 100px;
         transform: translate(-50%, -50%);
-    }
 
-    .ActionRandom.actionArenaEffect--active {
-        transform-origin: center;
-        animation: actionArenaEffect 1s forwards;
-    }
-
-    @keyframes actionArenaEffect {
-        0% {
-            transform: scale(1)translate(-50%, -50%);
-        }
-
-        80% {
-            opacity: 1;
-            transform: scale(1.5)translate(-50%, -50%);
-        }
-
-        100% {
+        .ActionRandomImg {
             opacity: 0;
-            transform: scale(1)translate(-50%, -50%);
+            width: 100%;
+            height: auto;
+            transition: opacity 0.5s;
+            position: absolute;
+            display: block;
+            z-index: 100000;
+            transform: translate(0%, 0%);
         }
+
+        &.ActionRandom.actionArenaEffect--active .ActionRandomImg{
+            transform-origin: center;
+            animation: actionArenaEffect 1s forwards;
+        }
+
+        @keyframes actionArenaEffect {
+            0% {
+                transform: scale(1)translate(0%, 0%);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(1.5)translate(0%, 0%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1)translate(0%, 0%);
+            }
+        }
+
     }
+
 
 }
 
