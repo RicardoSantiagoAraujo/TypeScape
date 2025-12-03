@@ -14,6 +14,8 @@ export interface SettingsConfig {
   actionCooldown: number;
   actionEffect: string[];
   actionEffectNumber: number;
+  startingEnemyInterval: number;
+  startingEnemiesPerSpawn: number;
 }
 
 export class Settings {
@@ -31,6 +33,8 @@ export class Settings {
   actionCooldown: number;
   actionEffect: string[];
   actionEffectNumber: number;
+  startingEnemyInterval: number;
+  startingEnemiesPerSpawn: number;
 
   constructor(config: SettingsConfig) {
     this.defaultCharacterName = config.defaultCharacterName;
@@ -51,5 +55,7 @@ export class Settings {
     this.actionCooldown = config.actionCooldown;
     this.actionEffect = config.actionEffect;
     this.actionEffectNumber = config.actionEffectNumber;
+    this.startingEnemyInterval = config.startingEnemyInterval;
+    this.startingEnemiesPerSpawn = config.startingEnemiesPerSpawn;
   }
 }

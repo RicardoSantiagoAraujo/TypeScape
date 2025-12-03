@@ -28,6 +28,9 @@ export class Game {
     items: {},
   };
   objectCounter: number = 0;
+  enemyIntervalId: any = null;
+  enemyInterval: number; // time between enemy spawns
+  enemiesPerSpawn: number; // number of enemies created per spawn
 
   constructor(settings: Settings) {
     console.log("Init game...");
@@ -38,6 +41,8 @@ export class Game {
     this.score_max = 0;
     this._steps = 0;
     this.steps_max = 0;
+    this.enemyInterval = settings.startingEnemyInterval;
+    this.enemiesPerSpawn = settings.startingEnemiesPerSpawn;
     this.activateMuteFunctionality();
     el.inputName.value = settings.defaultCharacterName; // Default name
     this.toggleStartButton();
@@ -117,17 +122,19 @@ export class Game {
     if (newState == "game_over") {
       console.log("Game over !");
       el.gameOverMenu.style.display = "block";
+      this.state = "ongoing";
+      this.player.hitpoints = this.player.hitpointsStarting;
+      this.steps = 0;
+      this.score = 0;
+      el.character.classList.remove("dead");
+      el.character.classList.remove("damaged");
+      this.enemyInterval = this.settings.startingEnemyInterval;
+      this.enemiesPerSpawn = this.settings.startingEnemiesPerSpawn;
       setTimeout(() => {
         this.player.x = this.settings.startingPositionX;
         this.player.y = this.settings.startingPositionY;
         this.player.render();
         el.gameOverMenu.style.display = "none";
-        this.state = "ongoing";
-        this.player.hitpoints = this.player.hitpointsStarting;
-        this.steps = 0;
-        this.score = 0;
-        el.character.classList.remove("dead");
-        el.character.classList.remove("damaged");
         // Remove objects from arena
         this.emptyArena(["enemies", "items"]);
       }, 1000);
@@ -182,9 +189,16 @@ export class Game {
   }
 
   enemyGenerator() {
-    let enemy_interval = 1000;
-    const intervalId = setInterval(() => {
-      for (let i = 0; i < 3; i++) {
+    // If an interval already exists, clear it
+    if (this.enemyIntervalId) {
+      clearInterval(this.enemyIntervalId);
+    }
+
+    this.enemyIntervalId = setInterval(() => {
+      for (let i = 0; i < this.enemiesPerSpawn; i++) {
+        if (this._state != "ongoing") {
+          return;
+        }
         this.objectCounter++;
         let enemy_width = getRandomNumberBetween(30, 150);
         let enemy_height = getRandomNumberBetween(30, 150);
@@ -205,7 +219,7 @@ export class Game {
         );
         this.objectDict.enemies[enemy.unique_id] = enemy;
       }
-    }, enemy_interval);
+    }, this.enemyInterval);
   }
 
   itemGenerator() {
@@ -219,6 +233,9 @@ export class Game {
       const item_type: itemType =
         probabilities[Math.floor(Math.random() * probabilities.length)];
       for (let i = 0; i < 1; i++) {
+        if (this._state != "ongoing") {
+          return;
+        }
         this.objectCounter++;
         let width = 30;
         let height = 30;
@@ -249,7 +266,8 @@ export class Game {
     for (let enemy of Object.values(this.objectDict.enemies)) {
       if (
         this.player.isCollidingWith(enemy as Enemy) &&
-        (enemy as Enemy).state == "active"
+        (enemy as Enemy).state == "active" &&
+        this._state == "ongoing"
       ) {
         // console.log("Collision detected!");
         this.state = this.player.takeDamage();
@@ -273,6 +291,16 @@ export class Game {
         setTimeout(() => {
           if ((item as Item).item_type == "point") {
             this.score = this._score + 1;
+            // Increase number of action effects to augment visuals
+            this.player.action.numberOfEffects += 1;
+            this.player.action.createEls();
+            // adjust time between enemy spawns
+            this.enemyInterval = Math.floor(this.enemyInterval * 0.99);
+            // adjust n of enemies per spawn
+            this.enemiesPerSpawn =
+              this.settings.startingEnemiesPerSpawn +
+              Math.floor(this._score / 10);
+            this.enemyGenerator();
           } else if ((item as Item).item_type == "health") {
             this.player.hitpoints = this.player._hitpoints + 1;
           }

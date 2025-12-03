@@ -22,5 +22,7 @@ export var settings = new Settings({
     "assets/img/actions/lightning6.png",
     "assets/img/actions/lightning7.png",
   ],
-  actionEffectNumber: 10,
+  actionEffectNumber: 5,
+  startingEnemyInterval: 1000,
+  startingEnemiesPerSpawn: 3,
 });

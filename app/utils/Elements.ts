@@ -15,6 +15,9 @@ export const elements = {
   actionCharacterEffect: document.getElementById(
     "actionCharacterEffect"
   ) as HTMLImageElement,
+  actionArenaEffect: document.getElementById(
+    "actionArenaEffect"
+  ) as HTMLDivElement,
   sufaceTextures: {
     arena: document.getElementById("arenaTexture") as HTMLDivElement,
     sea: document.getElementById("outerTexture") as HTMLDivElement,

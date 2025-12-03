@@ -28,6 +28,7 @@ export class Player extends Hitbox {
       settings.actionEffectNumber,
       settings.actionCooldown
     );
+    this.action.createEls()
   }
 
   moveCharacter(event: KeyboardEvent) {

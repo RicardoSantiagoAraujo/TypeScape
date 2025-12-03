@@ -15,16 +15,19 @@ export class Action {
     this.actionAvailable = true;
     this.numberOfEffects = numberOfEffects;
     this.cooldownMilliseconds = cooldownMilliseconds;
-    for (let i = 0; i < numberOfEffects; i++) {
+    this.createEls();
+  }
+
+  createEls() {
+    el.actionArenaEffect.innerHTML = ""; // empty the element to start anew
+    for (let i = 0; i < this.numberOfEffects; i++) {
       let currentAction;
       // Obtion A. Completely random:
       //   currentAction = Math.floor(Math.random() * settings.actionEffect.length);
       // Option B. Equal amount of each:
       currentAction = i % settings.actionEffect.length;
       let actionImg = settings.actionEffect[currentAction];
-      document.querySelector(
-        "#actionArenaEffect"
-      )!.innerHTML += `<div class="ActionRandom"><img class="ActionRandomImg" src=${actionImg}><div/>`;
+      el.actionArenaEffect.innerHTML += `<div class="ActionRandom"><img class="ActionRandomImg" src=${actionImg}><div/>`;
       // console.log(actionImg);
     }
   }
