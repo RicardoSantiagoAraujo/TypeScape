@@ -9,9 +9,9 @@ $item-size : 30px;
     text-align: center;
     transition: 0.3s;
 
-    &.picked{
+    &.picked {
         transition: 0.2s;
-        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.839), 0 0 10px rgba(0, 242, 255, 0.847));
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.839))drop-shadow(0 0 10px rgba(0, 242, 255, 0.847));
         opacity: 0.5;
         transform: scale(1.5);
     }

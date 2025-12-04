@@ -77,7 +77,7 @@
 
             60% {
 
-                filter: drop-shadow(0 0 30px rgba(255, 0, 0, 1))brightness(0)hue-rotate(90deg);
+                filter: drop-shadow(0 0 3px rgb(76, 0, 255))drop-shadow(0 0 30px rgba(255, 0, 0, 1))brightness(0)hue-rotate(90deg);
                 background: radial-gradient(rgb(249, 249, 249) 30%, black 40%, transparent 50%);
                 transform: scale(1.05, 0.95);
             }
@@ -145,7 +145,7 @@
             80% {
                 opacity: 1;
                 transform: scale(1.5)translate(0%, 0%);
-                filter: drop-shadow(0 0 10px red)brightness(1.5);
+                filter: drop-shadow(0 0 3px rgb(255, 0, 251))drop-shadow(0 0 10px red)brightness(1.5);
             }
 
             100% {

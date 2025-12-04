@@ -44,6 +44,7 @@ export class NonPlayerObject extends Hitbox {
     div.style.width = `${this.width}px`;
     div.style.height = `${this.height}px`;
     bgImg.style.backgroundImage = `url(${this.image_url})`;
+    // bgImg.style.backgroundPosition = `${this.x}px ${this.y}px `; // would need to be considered more carefully
 
     // Append the div to the body of the document
     div.appendChild(bgImg);

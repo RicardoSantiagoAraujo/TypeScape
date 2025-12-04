@@ -11,7 +11,7 @@ export var settings = new Settings({
   startingPositionY: null,
   characterHeight: 50, // must change in variables.scss too
   characterWidth: 50, // must change in variables.scss too
-  requireCharacterCreation: true,
+  requireCharacterCreation: false,
   actionCooldown: 3000,
   actionEffect: [
     "assets/img/actions/lightning1.png",
