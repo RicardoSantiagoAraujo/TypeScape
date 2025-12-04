@@ -38,6 +38,7 @@ export class Chronometer {
     this.stop(); // Stop the timer first
     this.time = 0; // Reset time
     this.element = this.displayTime(); // Optionally display reset time immediately
+    this._element.classList.remove("break-record");
   }
 
   // Display the current time (in seconds for simplicity)
@@ -51,6 +52,7 @@ export class Chronometer {
     if (this.time > this.time_max) {
       this.time_max = newTime;
       this.element_record.innerHTML = this.formatTime();
+      this._element.classList.add("break-record");
     }
   }
 

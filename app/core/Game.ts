@@ -136,6 +136,8 @@ export class Game {
       this.enemyInterval = this.settings.startingEnemyInterval;
       this.enemiesPerSpawn = this.settings.startingEnemiesPerSpawn;
       this.chronometer.reset();
+      el.counters.score.classList.remove("break-record");
+      el.counters.steps.classList.remove("break-record");
       setTimeout(() => {
         this.player.x = this.settings.startingPositionX;
         this.player.y = this.settings.startingPositionY;
@@ -154,6 +156,7 @@ export class Game {
     if (this._steps > this.steps_max) {
       this.steps_max = newStep;
       el.counters.steps_max.innerHTML = String(this.steps_max);
+      el.counters.steps.classList.add("break-record");
     }
   }
 
@@ -163,6 +166,7 @@ export class Game {
     if (this._score > this.score_max) {
       this.score_max = newScore;
       el.counters.score_max.innerHTML = String(this.score_max);
+      el.counters.score.classList.add("break-record");
     }
   }
 
