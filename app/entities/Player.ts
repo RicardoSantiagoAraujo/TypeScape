@@ -34,6 +34,7 @@ export class Player extends Hitbox {
 
   moveCharacter(event: KeyboardEvent) {
     let isMoved: boolean = false,
+      isMovementKey: boolean = true,
       x_new: number = this.x,
       x_old: number = this.x,
       y_new: number = this.y,
@@ -51,6 +52,7 @@ export class Player extends Hitbox {
       y_new -= this.speed;
       this.direction = "Up";
     } else {
+      isMovementKey = false;
       return 0;
     }
     // Prevent movement out of bounds
@@ -66,9 +68,8 @@ export class Player extends Hitbox {
     this.y = y_new;
     if (x_new != x_old || y_new != y_old) {
       isMoved = true;
-
-      this.hop();
     }
+    isMovementKey ? this.hop() : null;
     this.render();
     return isMoved ? 1 : 0;
   }
@@ -76,7 +77,7 @@ export class Player extends Hitbox {
   performAction(event: KeyboardEvent) {
     if (event.key === " ") {
       // console.log("Performing action");
-      el.character.classList.remove("action");
+      el.character.classList.remove("action", "action");
       setTimeout(() => {
         el.character.classList.add("action");
       }, 0);
@@ -128,7 +129,7 @@ export class Player extends Hitbox {
   }
 
   private hop() {
-    el.character.classList.remove("hop");
+    el.character.classList.remove("hop", "action");
     setTimeout(() => {
       el.character.classList.add("hop");
     }, 0);
