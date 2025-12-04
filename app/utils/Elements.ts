@@ -46,10 +46,10 @@ export const elements = {
       "#counters .counters__score_max span"
     ) as HTMLDivElement,
     survival_time: document.querySelector(
-      "#counters .counters__suvival_time span"
+      "#counters .counters__survival_time span"
     ) as HTMLDivElement,
     survival_time_max: document.querySelector(
-      "#counters .counters__suvival_time_max span"
+      "#counters .counters__survival_time_max span"
     ) as HTMLDivElement,
   },
   playerState: {

@@ -6,6 +6,7 @@ import { Item, itemType } from "../entities/Item.js";
 import { Settings } from "./Settings.js";
 import { elements as el } from "../utils/Elements.js";
 import { getRandomNumberBetween } from "../utils/helper.js";
+import { Chronometer } from "../entities/Chronometer.js";
 
 export type GameState = "ongoing" | "paused" | "game_over";
 
@@ -23,8 +24,6 @@ export class Game {
   score_max: number;
   _steps: number;
   steps_max: number;
-  _survival_time: number;
-  survival_time_max: number;
   objectDict: Record<"enemies" | "items", Record<string, NonPlayerObject>> = {
     enemies: {},
     items: {},
@@ -33,7 +32,7 @@ export class Game {
   enemyIntervalId: any = null;
   enemyInterval: number; // time between enemy spawns
   enemiesPerSpawn: number; // number of enemies created per spawn
-
+  chronometer: Chronometer;
   constructor(settings: Settings) {
     console.log("Init game...");
     this._state = "paused";
@@ -43,11 +42,13 @@ export class Game {
     this.score_max = 0;
     this._steps = 0;
     this.steps_max = 0;
-    this._survival_time = 0;
-    this.survival_time_max = 0;
     this.enemyInterval = settings.startingEnemyInterval;
     this.enemiesPerSpawn = settings.startingEnemiesPerSpawn;
     this.activateMuteFunctionality();
+    this.chronometer = new Chronometer(
+      el.counters.survival_time,
+      el.counters.survival_time_max
+    );
     el.inputName.value = settings.defaultCharacterName; // Default name
     this.toggleStartButton();
     if (settings.requireCharacterCreation) {
@@ -130,16 +131,17 @@ export class Game {
       this.player.hitpoints = this.player.hitpointsStarting;
       this.steps = 0;
       this.score = 0;
-      this._survival_time = 0,
       el.character.classList.remove("dead");
       el.character.classList.remove("damaged");
       this.enemyInterval = this.settings.startingEnemyInterval;
       this.enemiesPerSpawn = this.settings.startingEnemiesPerSpawn;
+      this.chronometer.reset();
       setTimeout(() => {
         this.player.x = this.settings.startingPositionX;
         this.player.y = this.settings.startingPositionY;
         this.player.render();
         el.gameOverMenu.style.display = "none";
+        this.chronometer.start();
         // Remove objects from arena
         this.emptyArena(["enemies", "items"]);
       }, 1000);
@@ -152,15 +154,6 @@ export class Game {
     if (this._steps > this.steps_max) {
       this.steps_max = newStep;
       el.counters.steps_max.innerHTML = String(this.steps_max);
-    }
-  }
-
-  set suvival_time(newTime: number) {
-    this._survival_time = newTime;
-    el.counters.survival_time.innerHTML = String(this._survival_time);
-    if (this._survival_time > this.survival_time_max) {
-      this.survival_time_max = newTime;
-      el.counters.survival_time_max.innerHTML = String(this.survival_time_max);
     }
   }
 
@@ -194,10 +187,12 @@ export class Game {
         console.log("Pause game !");
         this.state = "paused"; // Set the game state to "paused"
         el.pauseMenu.style.display = "block";
+        this.chronometer.stop();
       } else if (this._state === "paused") {
         console.log("Resume game !");
         this.state = "ongoing"; // Resume the game
         el.pauseMenu.style.display = "none";
+        this.chronometer.start();
       }
     }
   }
@@ -352,6 +347,8 @@ export class Game {
       this.player.render();
       this.enemyGenerator();
       this.itemGenerator();
+      this.chronometer.start();
+
       document.addEventListener("keydown", (event) => {
         if (this._state == "game_over") {
           return 0;
