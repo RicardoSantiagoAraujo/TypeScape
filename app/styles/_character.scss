@@ -32,6 +32,7 @@
         filter: blur(2px)drop-shadow(0 0 10px black);
     }
 
+    // shadow on ground
     &::before {
         content: "";
         position: absolute;
@@ -42,6 +43,51 @@
         border-radius: 50%;
         z-index: -1;
     }
+
+    &.hop {
+        animation: hop 0.2s ease-in;
+
+        @keyframes hop {
+            0% {
+                transform: translateY(0px)scaleY(1.05);
+
+            }
+
+            60% {
+
+                transform: translateY(-7px);
+            }
+
+            100% {
+
+                transform: translateY(0px)scaleY(0.95);
+            }
+        }
+
+    }
+
+
+    &.action {
+        animation: action 0.2s ease-in;
+
+        @keyframes action {
+            0% {
+                filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0));
+            }
+
+            60% {
+
+                filter: drop-shadow( 0 0 30px rgba(255, 0, 0, 1))brightness(0)hue-rotate(90deg);
+                background: radial-gradient(rgb(249, 249, 249) 30%, black 40%, transparent 50%);
+            }
+
+            100% {
+                filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0));
+            }
+        }
+
+    }
+
 }
 
 
@@ -72,7 +118,7 @@
             transform: translate(0%, 0%);
         }
 
-        &.ActionRandom.actionArenaEffect--active .ActionRandomImg{
+        &.ActionRandom.actionArenaEffect--active .ActionRandomImg {
             transform-origin: center;
             animation: actionArenaEffect 1s forwards;
         }

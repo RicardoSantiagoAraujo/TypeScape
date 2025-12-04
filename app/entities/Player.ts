@@ -6,6 +6,7 @@ import { GameState } from "../core/Game.js";
 export class Player extends Hitbox {
   public action: Action;
   public _hitpoints: number = 0;
+  private directionVersion: 1 | 2 = 1; // direction version
 
   constructor(
     public name: string,
@@ -20,7 +21,7 @@ export class Player extends Hitbox {
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
     this.name = name;
-    el.playerState.icon.src = `assets/img/characters/${this.id}/${this.id}Down.png`;
+    el.playerState.icon.src = `assets/img/characters/${this.id}/${this.id}Down1.png`;
     el.playerState.name.innerHTML = name;
     this.hitpointsStarting = hitpointsStarting;
     this.hitpoints = hitpointsStarting;
@@ -37,7 +38,6 @@ export class Player extends Hitbox {
       x_old: number = this.x,
       y_new: number = this.y,
       y_old: number = this.y;
-
     if (event.key === "ArrowDown" || event.key === "s") {
       y_new += this.speed;
       this.direction = "Down";
@@ -66,6 +66,8 @@ export class Player extends Hitbox {
     this.y = y_new;
     if (x_new != x_old || y_new != y_old) {
       isMoved = true;
+
+      this.hop();
     }
     this.render();
     return isMoved ? 1 : 0;
@@ -74,6 +76,10 @@ export class Player extends Hitbox {
   performAction(event: KeyboardEvent) {
     if (event.key === " ") {
       // console.log("Performing action");
+      el.character.classList.remove("action");
+      setTimeout(() => {
+        el.character.classList.add("action");
+      }, 0);
       return this.action.triggerAction(event);
     }
   }
@@ -106,13 +112,25 @@ export class Player extends Hitbox {
     }
   }
 
+  flipDirectionVersion(): 1 | 2 {
+    return this.directionVersion == 1 ? 2 : 1;
+  }
+
   render() {
     if (el.character) {
       // Update the player's position in the DOM using CSS transforms
       // el.character.style.transform = `translate(${this.x}px, ${this.y}px)`;
       el.character.style.top = `${this.y}px`;
       el.character.style.left = `${this.x}px`;
-      el.imgCharacter.src = `assets/img/characters/${this.id}/${this.id}${this.direction}.png`;
+      this.directionVersion = this.flipDirectionVersion();
+      el.imgCharacter.src = `assets/img/characters/${this.id}/${this.id}${this.direction}${this.directionVersion}.png`;
     }
+  }
+
+  private hop() {
+    el.character.classList.remove("hop");
+    setTimeout(() => {
+      el.character.classList.add("hop");
+    }, 0);
   }
 }

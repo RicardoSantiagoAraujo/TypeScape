@@ -96,7 +96,7 @@ export class Game {
         <input type="radio" name="option" value=${charId} ${
         charId == settings.defaultCharacterId ? "checked" : ""
       }>
-        <img src=${`assets/img/characters/${charId}/${charId}Down.png`} alt=${charId} />
+        <img src=${`assets/img/characters/${charId}/${charId}Down1.png`} alt=${charId} />
          `;
       if (charId == settings.defaultCharacterId) {
         this.chosen_character_id = charId;
