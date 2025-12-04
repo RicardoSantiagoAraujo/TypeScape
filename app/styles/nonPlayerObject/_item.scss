@@ -14,4 +14,17 @@
     &.spawning {
         filter: brightness(10)blur(5px)drop-shadow(0 0 10px white);
     }
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 10px;
+        background: radial-gradient(rgba(15, 21, 0, 0.356) 50%, transparent 90%);
+        left:0px;
+        bottom: 0px;
+        border-radius: 50%;
+        box-shadow: px 0px 15px 5px rgba(0, 0, 0, 0.2);
+        z-index: 0;
+    }
 }
