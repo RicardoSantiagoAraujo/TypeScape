@@ -1,9 +1,10 @@
 @use '../variables' as var;
 
-$bg-size : 30px;
+$bg-size : 140px;
 $border-radius: 10px;
 
 #nonPlayerObjects #enemies {
+    z-index: 0;
     filter: drop-shadow(0 0 3px red) drop-shadow(0 0 15px red) drop-shadow(0 0 1px blue);
 
     //
@@ -16,7 +17,7 @@ $border-radius: 10px;
     mask-image: url(../../assets/img/textures/gallaxy.jpg);
     // mask-mode: alpha;
     mask-mode: luminance;
-    mask-size: cover;
+    mask-size: var.$arena-width var.$arena-height;
     mask-position: center;
     mask-repeat: repeat;
     animation: maskMove 20s infinite linear, bgFilter 10s infinite linear alternate;
@@ -29,7 +30,7 @@ $border-radius: 10px;
 
         100% {
 
-            mask-position: calc($bg-size * -1), calc($bg-size * -1);
+            mask-position: calc(var.$arena-width * -1), calc(var.$arena-height * -1);
         }
 
     }
@@ -59,7 +60,8 @@ $border-radius: 10px;
     overflow: hidden;
 
     &.spawning {
-        filter: brightness(10)blur(5px)drop-shadow(0 0 10px white);
+        filter: brightness(10)blur(0px)drop-shadow(0 0 10px white)drop-shadow(0 0 3px yellow)drop-shadow(0 0 1px orange);
+        background: red;
     }
 
     &.destroyed {
@@ -92,7 +94,7 @@ $border-radius: 10px;
         background-position: center;
         background-repeat: repeat;
         border-radius: $border-radius;
-        animation: bgTranslate 3s infinite linear, bgRotate 120s infinite linear;
+        animation: bgTranslate 10s infinite linear; // bgRotate 120s infinite linear;
         background-attachment: fixed;
         transform-origin: center;
 

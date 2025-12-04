@@ -6,7 +6,7 @@ export class Enemy extends NonPlayerObject {
   public stateEnemy: "inactive" | "active" = "inactive";
   enemy_unique_id: string;
   private static counterEnemy: number = 0;
-  public image_url: string = "../assets/img/textures/blackhole.png";
+  public image_url: string = "../assets/img/textures/space_reduced.png";
 
   constructor(
     x: number,

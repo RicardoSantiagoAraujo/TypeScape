@@ -2,6 +2,10 @@
 
 $item-size : 30px;
 
+#nonPlayerObjects #items {
+    z-index: 1;
+}
+
 .nonPlayerObject.item {
     position: absolute;
     // border: 1px solid rgba(0, 255, 34, 0.581);
