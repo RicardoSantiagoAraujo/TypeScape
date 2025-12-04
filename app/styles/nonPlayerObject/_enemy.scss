@@ -1,12 +1,24 @@
 @use '../variables' as var;
 
+#nonPlayerObjects #enemies {
+    filter: drop-shadow(0 0 3px red);
+    border: var.$arena-border-width solid transparent;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+}
+
+
 
 .nonPlayerObject.enemy {
     position: absolute;
     // border: 1px solid rgba(255, 0, 0, 0.323);
     background-color: black;
     border-radius: 8px;
-    box-shadow: 0 0 30px black;
     text-align: center;
     transition: 0.3s;
 
