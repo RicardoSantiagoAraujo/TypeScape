@@ -1,3 +1,5 @@
+import { NonPlayerObject } from "../entities/nonPlayerObject";
+
 export const elements = {
   imgCharacter: document.getElementById("imgCharacter") as HTMLImageElement,
   inputName: document.getElementById("inputName") as HTMLInputElement,
@@ -11,6 +13,14 @@ export const elements = {
   pauseMenu: document.getElementById("pauseMenu") as HTMLDivElement,
   gameOverMenu: document.getElementById("gameOverMenu") as HTMLDivElement,
   arena: document.getElementById("arena") as HTMLDivElement,
+  nonPlayerObjects: {
+    items: document.querySelector(
+      "#nonPlayerObjects #items"
+    ) as HTMLImageElement,
+    enemies: document.querySelector(
+      "#nonPlayerObjects #enemies"
+    ) as HTMLImageElement,
+  },
   character: document.getElementById("character") as HTMLDivElement,
   actionCharacterEffect: document.getElementById(
     "actionCharacterEffect"

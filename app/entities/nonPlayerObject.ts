@@ -47,7 +47,11 @@ export class NonPlayerObject extends Hitbox {
 
     // Append the div to the body of the document
     div.appendChild(bgImg);
-    el.arena.appendChild(div);
+    if (this.classNames.includes("item")) {
+      el.nonPlayerObjects.items.appendChild(div);
+    } else if (this.classNames.includes("enemy")) {
+      el.nonPlayerObjects.enemies.appendChild(div);
+    }
 
     // Add style for fully spawned
     setTimeout(() => {
