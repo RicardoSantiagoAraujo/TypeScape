@@ -17,3 +17,10 @@ or
 ```bash
 npm run docs
 ```
+
+### Generating sprites with helper script:
+
+```bash
+python -m sprites.split_sprites
+```
+

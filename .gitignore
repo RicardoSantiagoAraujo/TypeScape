@@ -33,3 +33,5 @@ Temporary Items
 node_modules/
 */**/node_modules/
 */dist/
+pokemon_sprites/
+output_sprites/

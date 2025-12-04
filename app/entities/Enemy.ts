@@ -1,12 +1,13 @@
 import { Hitbox } from "./Hitbox.js";
 import { elements as el } from "../utils/Elements.js";
 import { NonPlayerObject } from "./nonPlayerObject.js";
+import { settings } from "../settings.js";
 
 export class Enemy extends NonPlayerObject {
   public stateEnemy: "inactive" | "active" = "inactive";
   enemy_unique_id: string;
   private static counterEnemy: number = 0;
-  public image_url: string = "../assets/img/textures/space_reduced.png";
+  public image_url: string = settings.enemyBackgroundImage;
 
   constructor(
     x: number,

@@ -16,6 +16,7 @@ export interface SettingsConfig {
   actionEffectNumber: number;
   startingEnemyInterval: number;
   startingEnemiesPerSpawn: number;
+  enemyBackgroundImage: string;
 }
 
 export class Settings {
@@ -35,6 +36,8 @@ export class Settings {
   actionEffectNumber: number;
   startingEnemyInterval: number;
   startingEnemiesPerSpawn: number;
+
+  enemyBackgroundImage: string;
 
   constructor(config: SettingsConfig) {
     this.defaultCharacterName = config.defaultCharacterName;
@@ -57,5 +60,6 @@ export class Settings {
     this.actionEffectNumber = config.actionEffectNumber;
     this.startingEnemyInterval = config.startingEnemyInterval;
     this.startingEnemiesPerSpawn = config.startingEnemiesPerSpawn;
+    this.enemyBackgroundImage = config.enemyBackgroundImage;
   }
 }

@@ -25,4 +25,5 @@ export var settings = new Settings({
   actionEffectNumber: 5,
   startingEnemyInterval: 1000,
   startingEnemiesPerSpawn: 3,
+  enemyBackgroundImage: "../assets/img/textures/space_reduced.png"
 });
