@@ -202,7 +202,7 @@ export class Game {
     if (this.enemyIntervalId) {
       clearInterval(this.enemyIntervalId);
     }
-    console.log(this.enemyInterval);
+    // console.log("Enemy interval: ", this.enemyInterval);
 
     this.enemyIntervalId = setInterval(() => {
       for (let i = 0; i < this.enemiesPerSpawn; i++) {
@@ -298,6 +298,7 @@ export class Game {
         this.player.isCollidingWith(item as Item) &&
         (item as Item).state == "active"
       ) {
+        let itemEl = document.querySelector(`.${item.unique_id}`);
         if ((item as Item).item_type == "point") {
           this.score = this._score + 1;
           // Increase number of action effects to augment visuals
@@ -314,8 +315,10 @@ export class Game {
           this.player.hitpoints = this.player._hitpoints + 1;
         }
         delete this.objectDict.items[item.unique_id];
+        itemEl?.classList.add("picked");
+        console.log(itemEl);
         setTimeout(() => {
-          document.querySelector(`.${item.unique_id}`)?.remove();
+          itemEl?.remove();
         }, 200);
         isOngoingItemCollision = true;
       } else {

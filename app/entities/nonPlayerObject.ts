@@ -25,6 +25,7 @@ export class NonPlayerObject extends Hitbox {
 
   public addElement() {
     const div = document.createElement("div");
+    const bgImg = document.createElement("div");
     // Set the text content of the div
     div.textContent = "";
 
@@ -35,15 +36,17 @@ export class NonPlayerObject extends Hitbox {
       ...this.classNames,
       "spawning"
     );
+    bgImg.classList.add("nonPlayerObject__bg-img");
 
     // Set styles directly on the div
     div.style.left = `${this.x}px`;
     div.style.top = `${this.y}px`;
     div.style.width = `${this.width}px`;
     div.style.height = `${this.height}px`;
-    div.style.backgroundImage = `url(${this.image_url})`;
+    bgImg.style.backgroundImage = `url(${this.image_url})`;
 
     // Append the div to the body of the document
+    div.appendChild(bgImg);
     el.arena.appendChild(div);
 
     // Add style for fully spawned
@@ -55,7 +58,9 @@ export class NonPlayerObject extends Hitbox {
 
   // Update the image of the div element when `image_url` changes
   public updateElement() {
-    const div = document.querySelector(`.${this.unique_id}`) as HTMLElement;
+    const div = document.querySelector(
+      `.${this.unique_id} .nonPlayerObject__bg-img`
+    ) as HTMLElement;
     if (div) {
       div.style.backgroundImage = `url(${this.image_url})`;
     }

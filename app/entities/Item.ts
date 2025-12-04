@@ -17,7 +17,7 @@ export class Item extends NonPlayerObject {
     spawnDelay: number,
     item_type: itemType
   ) {
-    super(x, y, width, height, spawnDelay, ["item"]); // Call the NonPlayerObject constructor
+    super(x, y, width, height, spawnDelay, ["item", item_type]); // Call the NonPlayerObject constructor
     Item.counterItem++;
     this.item_unique_id = `item_${Item.counterItem}`;
     this.item_type = item_type;
