@@ -127,7 +127,7 @@ export class Game {
     if (newState == "game_over") {
       console.log("Game over !");
       el.gameOverMenu.style.display = "block";
-      this.state = "ongoing";
+
       this.player.hitpoints = this.player.hitpointsStarting;
       this.steps = 0;
       this.score = 0;
@@ -141,6 +141,7 @@ export class Game {
       setTimeout(() => {
         this.player.x = this.settings.startingPositionX;
         this.player.y = this.settings.startingPositionY;
+        this.state = "ongoing";
         this.player.render();
         el.gameOverMenu.style.display = "none";
         this.chronometer.start();
