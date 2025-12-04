@@ -5,12 +5,12 @@ export var settings = new Settings({
   defaultCharacterId: "pikachu",
   availableCharacters: ["pikachu", "farfetchd"],
   movementDistancePerClick: 50,
-  arenaWidth: 550,
-  arenaHeight: 550,
+  arenaWidth: 750, // must change in variables.scss too
+  arenaHeight: 500, // must change in variables.scss too
   startingPositionX: null,
   startingPositionY: null,
-  characterHeight: 50,
-  characterWidth: 50,
+  characterHeight: 50, // must change in variables.scss too
+  characterWidth: 50, // must change in variables.scss too
   requireCharacterCreation: true,
   actionCooldown: 3000,
   actionEffect: [

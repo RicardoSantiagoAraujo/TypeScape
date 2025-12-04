@@ -42,7 +42,7 @@ export class Chronometer {
 
   // Display the current time (in seconds for simplicity)
   private displayTime(): number {
-    console.log(`Time: ${this.formatTime()}`);
+    // console.log(`Time: ${this.formatTime()}`);
     return this.time;
   }
 
