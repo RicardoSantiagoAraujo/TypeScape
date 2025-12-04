@@ -172,9 +172,13 @@ export class Game {
       for (const [key, val] of Object.entries(this.objectDict[item_type])) {
         // console.log(`.${(val as NonPlayerObject).unique_id}`);
         delete this.objectDict[item_type][key];
-        document
-          .querySelector(`.${(val as NonPlayerObject).unique_id}`)
-          ?.remove();
+        let elToDelete = document.querySelector(
+          `.${(val as NonPlayerObject).unique_id}`
+        );
+        elToDelete?.classList.add("destroyed");
+        setTimeout(() => {
+          elToDelete?.remove();
+        }, 500);
       }
     }
   }
