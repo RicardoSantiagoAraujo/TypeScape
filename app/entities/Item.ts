@@ -24,18 +24,15 @@ export class Item extends NonPlayerObject {
 
     switch (item_type) {
       case "health": {
-        this.image_url =
-          "https://psdgraphics.com/wp-content/uploads/2022/01/red-heart.png";
+        this.image_url = "assets/img/items/heart.png";
         break;
       }
       case "point": {
-        this.image_url =
-          "https://static.vecteezy.com/system/resources/previews/010/256/785/non_2x/modern-flat-icon-of-game-point-vector.jpg";
+        this.image_url = "assets/img/items/coin.png";
         break;
       }
       default: {
-        this.image_url =
-          "https://psdgraphics.com/wp-content/uploads/2022/01/red-heart.png";
+        this.image_url = "assets/img/items/skull.png";
         break;
       }
     }

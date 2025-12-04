@@ -28,7 +28,7 @@ export class Player extends Hitbox {
       settings.actionEffectNumber,
       settings.actionCooldown
     );
-    this.action.createEls()
+    this.action.createEls();
   }
 
   moveCharacter(event: KeyboardEvent) {
@@ -88,12 +88,10 @@ export class Player extends Hitbox {
     if (newHitpoints <= 3) {
       // If up two n points, show each one
       el.playerState.health.innerHTML =
-        "<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' />".repeat(
-          newHitpoints
-        );
+        "<img src='assets/img/items/heart.png' />".repeat(newHitpoints);
     } else {
       // Display with a number otherwise
-      el.playerState.health.innerHTML = `<img src='https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' /> × ${newHitpoints}`;
+      el.playerState.health.innerHTML = `<img src='assets/img/items/heart.png' /> × ${newHitpoints}`;
     }
   }
 
@@ -101,8 +99,7 @@ export class Player extends Hitbox {
     this.hitpoints = this._hitpoints - 1;
     if (this._hitpoints <= 0) {
       el.character.classList.add("dead");
-      el.imgCharacter.src =
-        "https://p7.hiclipart.com/preview/415/127/691/8-bit-color-skull-pixel-art-skull.jpg";
+      el.imgCharacter.src = "assets/img/items/skull.png";
       return "game_over";
     } else {
       return "ongoing";
