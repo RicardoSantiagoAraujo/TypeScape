@@ -24,3 +24,4 @@ npm run docs
 python -m sprites.split_sprites
 ```
 
+While specifying the **sprite_id** in the file. For each id, a config can be added and. stored in **configs.py**

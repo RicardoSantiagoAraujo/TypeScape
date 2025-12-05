@@ -3,7 +3,20 @@ import { Settings } from "./core/Settings.js";
 export var settings = new Settings({
   defaultCharacterName: "Default Name",
   defaultCharacterId: "pikachu",
-  availableCharacters: ["pikachu", "farfetchd", "psyduck", "snorlax"],
+  availableCharacters: [
+    "pikachu",
+    "farfetchd",
+    "psyduck",
+    "snorlax",
+    "jigglypuff",
+    "gengar",
+    "ditto",
+    "raichu",
+    "mewtwo",
+    "ninetails",
+    "magikarp",
+    "dragonite",
+  ],
   movementDistancePerClick: 50,
   arenaWidth: 750, // must change in variables.scss too
   arenaHeight: 500, // must change in variables.scss too
@@ -25,5 +38,5 @@ export var settings = new Settings({
   actionEffectNumber: 5,
   startingEnemyInterval: 1000,
   startingEnemiesPerSpawn: 3,
-  enemyBackgroundImage: "../assets/img/textures/space_reduced.png"
+  enemyBackgroundImage: "../assets/img/textures/space_reduced.png",
 });

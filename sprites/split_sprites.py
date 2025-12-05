@@ -40,16 +40,18 @@ def slice_sprite_sheet(sprite_sheet_path, sprites_per_row, sprites_per_col, outp
 
 if __name__ == "__main__":
     # Define parameters
-    sprite_id="farfetchd"
-    sprite_sheet_path = f"./sprites/pokemon_sprites/{sprite_id}.png"
-    sprites_per_row = 4
-    sprites_per_col = 4
-    output_dir = f"./sprites/output_sprites/{sprite_id}"
-    config = configs[sprite_id]
-
-    # Create output directory if it doesn't exist
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    sprite_ids=["dragonite"]
 
     # Call the function to slice the sprite sheet
-    slice_sprite_sheet(sprite_sheet_path, sprites_per_row, sprites_per_col, output_dir, config)
+    for sprite_id in sprite_ids:
+
+        sprite_sheet_path = f"./sprites/pokemon_sprites/{sprite_id}.png"
+        sprites_per_row = 4
+        sprites_per_col = 4
+        output_dir = f"./sprites/output_sprites/{sprite_id}"
+        config = configs[sprite_id]
+        # Create output directory if it doesn't exist
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        slice_sprite_sheet(sprite_sheet_path, sprites_per_row, sprites_per_col, output_dir, config)
