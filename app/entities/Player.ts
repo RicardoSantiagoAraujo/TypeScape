@@ -6,7 +6,7 @@ import { GameState } from "../core/Game.js";
 export class Player extends Hitbox {
   public action: Action;
   public _hitpoints: number = 0;
-  private directionVersion: 1 | 2 = 1; // direction version
+  private frame: number = 1; // direction version
 
   constructor(
     public name: string,
@@ -113,8 +113,14 @@ export class Player extends Hitbox {
     }
   }
 
-  flipDirectionVersion(): 1 | 2 {
-    return this.directionVersion == 1 ? 2 : 1;
+  nextFrame(): number {
+    // omly using half the frames for now
+    this.frame += 2;
+    if (this.frame >= 5) {
+      this.frame = 1;
+    }
+    console.log(this.frame);
+    return this.frame;
   }
 
   render() {
@@ -123,8 +129,8 @@ export class Player extends Hitbox {
       // el.character.style.transform = `translate(${this.x}px, ${this.y}px)`;
       el.character.style.top = `${this.y}px`;
       el.character.style.left = `${this.x}px`;
-      this.directionVersion = this.flipDirectionVersion();
-      el.imgCharacter.src = `assets/img/characters/${this.id}/${this.id}${this.direction}${this.directionVersion}.png`;
+      this.frame = this.nextFrame();
+      el.imgCharacter.src = `assets/img/characters/${this.id}/${this.id}${this.direction}${this.frame}.png`;
     }
   }
 

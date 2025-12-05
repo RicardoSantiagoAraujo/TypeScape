@@ -3,7 +3,7 @@ import { Settings } from "./core/Settings.js";
 export var settings = new Settings({
   defaultCharacterName: "Default Name",
   defaultCharacterId: "pikachu",
-  availableCharacters: ["pikachu", "farfetchd"],
+  availableCharacters: ["pikachu", "farfetchd", "psyduck", "snorlax"],
   movementDistancePerClick: 50,
   arenaWidth: 750, // must change in variables.scss too
   arenaHeight: 500, // must change in variables.scss too
@@ -11,7 +11,7 @@ export var settings = new Settings({
   startingPositionY: null,
   characterHeight: 50, // must change in variables.scss too
   characterWidth: 50, // must change in variables.scss too
-  requireCharacterCreation: false,
+  requireCharacterCreation: true,
   actionCooldown: 3000,
   actionEffect: [
     "assets/img/actions/lightning1.png",
