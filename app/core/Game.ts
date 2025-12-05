@@ -54,7 +54,7 @@ export class Game {
     if (settings.requireCharacterCreation) {
       this.presentAvailableCharacter(settings);
       el.inputName.oninput = this.toggleStartButton;
-      el.inputName.onkeydown = (event) => this.startRound(event);
+      el.inputName.onkeydown = (event) => this.startGame(event);
       el.btnStart.onclick = (event) => {
         this.player = new Player(
           el.inputName.value,
@@ -67,7 +67,7 @@ export class Game {
           settings.movementDistancePerClick,
           "Down"
         );
-        this.startRound(event);
+        this.startGame(event);
       };
     } else {
       this.player = new Player(
@@ -81,7 +81,7 @@ export class Game {
         settings.movementDistancePerClick,
         "Down"
       );
-      this.startRound(new MouseEvent("click"));
+      this.startGame(new MouseEvent("click"));
     }
   }
 
@@ -340,7 +340,7 @@ export class Game {
     }
   }
 
-  startRound(event: KeyboardEvent | MouseEvent) {
+  startGame(event: KeyboardEvent | MouseEvent) {
     if (
       event instanceof KeyboardEvent &&
       event.key !== "Enter" &&
@@ -356,7 +356,7 @@ export class Game {
       el.actionCooldownTimer._all.style.display = "flex";
       this.state = "ongoing";
       el.audioElement.play();
-      console.log("Starting Round");
+      // console.log("Starting Round");
       this.player.render();
       this.enemyGenerator();
       this.itemGenerator();

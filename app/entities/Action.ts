@@ -11,7 +11,7 @@ export class Action {
   cooldownMilliseconds: number;
 
   constructor(numberOfEffects: number, cooldownMilliseconds: number) {
-    console.log("Action constructor !");
+    // console.log("Action constructor !");
     this.actionAvailable = true;
     this.numberOfEffects = numberOfEffects;
     this.cooldownMilliseconds = cooldownMilliseconds;

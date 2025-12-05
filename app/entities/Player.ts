@@ -7,6 +7,8 @@ export class Player extends Hitbox {
   public action: Action;
   public _hitpoints: number = 0;
   private frame: number = 1; // direction version
+  private lastInputTime = 0;
+  private lastInputEvent: KeyboardEvent = new KeyboardEvent(" ");
 
   constructor(
     public name: string,
@@ -32,13 +34,10 @@ export class Player extends Hitbox {
     this.action.createEls();
   }
 
-  moveCharacter(event: KeyboardEvent) {
-    let isMoved: boolean = false,
-      isMovementKey: boolean = true,
+  determineMovement(event: KeyboardEvent): [number, number, boolean] {
+    let isMovementKey: boolean = true,
       x_new: number = this.x,
-      x_old: number = this.x,
-      y_new: number = this.y,
-      y_old: number = this.y;
+      y_new: number = this.y;
     if (event.key === "ArrowDown" || event.key === "s") {
       y_new += this.speed;
       this.direction = "Down";
@@ -53,16 +52,31 @@ export class Player extends Hitbox {
       this.direction = "Up";
     } else {
       isMovementKey = false;
+    }
+
+    return [x_new, y_new, isMovementKey];
+  }
+  moveCharacter(event: KeyboardEvent) {
+    let isMoved: boolean = false,
+      x_old: number = this.x,
+      y_old: number = this.y;
+
+    // Destructure the result of determineMovement to get x_new, y_new, and isMovementKey
+    let [x_new, y_new, isMovementKey] = this.determineMovement(event);
+
+    if (!isMovementKey) {
       return 0;
     }
+    // in case i want to know if there was a double movement input or not
+    // this.checkIfCombinationInput(event);
     // Prevent movement out of bounds
     x_new = Math.max(
       0,
-      Math.min(settings.arenaWidth - settings.characterWidth, x_new)
+      Math.min(settings.arenaWidth - settings.characterWidth, x_new as number)
     );
     y_new = Math.max(
       0,
-      Math.min(settings.arenaHeight - settings.characterHeight, y_new)
+      Math.min(settings.arenaHeight - settings.characterHeight, y_new as number)
     );
     this.x = x_new;
     this.y = y_new;
@@ -72,6 +86,27 @@ export class Player extends Hitbox {
     isMovementKey ? this.hop() : null;
     this.render();
     return isMoved ? 1 : 0;
+  }
+
+  checkIfCombinationInput(event: KeyboardEvent) {
+    const currentTime = new Date().getTime();
+    const timeDifference = currentTime - this.lastInputTime;
+
+    let result;
+    // If the time difference between clicks is small, it's a double-click
+    if (timeDifference < 300 && event.key != this.lastInputEvent!.key) {
+      // 300ms is a common threshold for double-click
+      console.log("Double-click detected!");
+      result = true;
+    } else {
+      console.log("Single-click detected.");
+      result = false;
+    }
+
+    let previousInputEvent = this.lastInputEvent; // save previous key before overwriting it
+    this.lastInputTime = currentTime; // update last input time
+    this.lastInputEvent = event; // update last input key
+    return [result, previousInputEvent];
   }
 
   performAction(event: KeyboardEvent) {
@@ -119,7 +154,7 @@ export class Player extends Hitbox {
     if (this.frame >= 5) {
       this.frame = 1;
     }
-    console.log(this.frame);
+    // console.log("Frame n :" , this.frame);
     return this.frame;
   }
 
