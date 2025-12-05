@@ -18,7 +18,7 @@ configs ={
             3:[[25,4]]*4
             }
     },
-        "farfetchd" : {
+    "farfetchd" : {
         "name": "farfetchd",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -37,7 +37,7 @@ configs ={
             3:[[25,4]]*4
             }
     },
-        "psyduck" : {
+    "psyduck" : {
         "name": "psyduck",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -56,7 +56,7 @@ configs ={
             3:[[25,4]]*4
             }
     },
-        "snorlax" : {
+    "snorlax" : {
         "name": "snorlax",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -75,7 +75,7 @@ configs ={
             3:[[8,4]]*4
             }
     },
-        "gengar" : {
+    "gengar" : {
         "name": "gengar",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -94,7 +94,7 @@ configs ={
             3:[[20,7]]*4
             }
     } ,
-        "ditto" : {
+    "ditto" : {
         "name": "ditto",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -113,7 +113,7 @@ configs ={
             3:[[36,3]]*4
             }
     },
-            "jigglypuff" : {
+    "jigglypuff" : {
         "name": "jigglypuff",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -132,7 +132,7 @@ configs ={
             3:[[30,4]]*4
             }
     },
-                "raichu" : {
+    "raichu" : {
         "name": "raichu",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
@@ -170,7 +170,7 @@ configs ={
             3:[[6,4]]*4
             }
     },
-        "ninetails" : {
+    "ninetails" : {
         "name": "ninetails",
         "row_suffix":["Down", "Left", "Right","Up"],
         "col_suffix": [1,2,3,4],
