@@ -23,7 +23,7 @@ export class Player extends Hitbox {
   ) {
     super(x, y, width, height); // Call the Hitbox constructor
     this.name = name;
-    el.playerState.icon.src = `assets/img/characters/${this.id}/${this.id}Down1.png`;
+    el.playerState.icon.src = `assets/img/characters/${this.id}/gif/${this.id}Down.gif`;
     el.playerState.name.innerHTML = name;
     this.hitpointsStarting = hitpointsStarting;
     this.hitpoints = hitpointsStarting;

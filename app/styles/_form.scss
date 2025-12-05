@@ -81,11 +81,37 @@
             display: none;
 
 
+            $char-border-rad: 3px;
 
-            &:checked+img {
+            &:checked+.character-img-wrapper {
                 background-color: rgba(0, 128, 0, 0.543);
                 border-radius: 10px;
-                border: 3px solid rgb(30, 255, 0);
+                border: $char-border-rad solid rgb(30, 255, 0);
+                inset: $char-border-rad;
+
+                .static-img {
+                    display: none;
+                }
+
+                .gif {
+                    display: block;
+
+                }
+            }
+
+            &:not(:checked)+.character-img-wrapper {
+                border: $char-border-rad solid transparent;
+                inset: $char-border-rad;
+                filter: saturate(0.5);
+
+                .static-img {
+                    display: block;
+                }
+
+                .gif {
+                    display: none !important;
+                }
+
             }
         }
 

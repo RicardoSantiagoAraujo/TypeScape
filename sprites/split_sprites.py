@@ -59,7 +59,7 @@ def create_gif(i, dict):
     duration = 0.5  # Duration of each frame in the gif
     # Save images as a gif
     os.makedirs(output_dir_extended, exist_ok=True)
-    imageio.mimsave(output_path, images, duration=duration)
+    imageio.mimsave(output_path, images, duration=duration, loop=0)
     print(f"Created GIF : {output_path}")
 
 if __name__ == "__main__":
@@ -73,6 +73,7 @@ if __name__ == "__main__":
         sprites_per_row = 4
         sprites_per_col = 4
         output_dir = f"./sprites/output_sprites/{sprite_id}"
+        output_dir = f"./app/assets/img/characters/{sprite_id}"
         config = configs[sprite_id]
         # Create output directory if it doesn't exist
         if not os.path.exists(output_dir):
